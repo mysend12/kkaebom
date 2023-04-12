@@ -134,3 +134,7 @@ app.*.symbols
 
 # TODO flutterfire configure로 생성 가능
 lib/firebase_options.dart
+/ios/firebase_app_id_file.json
+/android/app/google-services.json
+/ios/Runner/GoogleService-Info.plist
+/ios/Podfile
