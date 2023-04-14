@@ -22,6 +22,7 @@ dependencies:
   path_provider: ^2.0.14
   path: ^1.8.2
   firebase_remote_config: ^4.0.0
+  dynamic_color: ^1.6.3
 
 dev_dependencies:
   flutter_test:
