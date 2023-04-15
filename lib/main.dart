@@ -3,8 +3,11 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
+import 'package:kkaebom/core/di/provider_setup.dart';
 import 'package:kkaebom/firebase_options.dart';
 import 'package:kkaebom/ui/shared/theme/colors.dart';
+import 'package:kkaebom/ui/view/home/home_view_model.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,7 +24,12 @@ void main() async {
   String apiUrl = remoteConfig.getString('apiUrl');
   remoteConfig.fetchAndActivate();
 
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: await getProviders(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -33,6 +41,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final homeViewModel = context.watch<HomeViewModel>();
+
     return DynamicColorBuilder(builder: (lightColorScheme, darkColorScheme) {
       return MaterialApp(
         title: 'Flutter Demo',
@@ -42,9 +52,11 @@ class MyApp extends StatelessWidget {
           children: [
             TextButton(
               onPressed: () {
-                changeBaseColor(Colors.blueGrey);
+                homeViewModel.sharedState.setI(
+                  homeViewModel.sharedState.i + 1
+                );
               },
-              child: const Text('blueGrey'),
+              child: Text('Test: ${homeViewModel.test}'),
             ),
             TextButton(
               onPressed: () {
