@@ -9,10 +9,10 @@ import 'package:path/path.dart' as p;
 class DatabaseOpenConnectorImpl extends DatabaseOpenConnector{
 
   @override
-  QueryExecutor openConnection(String name) {
+  QueryExecutor openConnection() {
     return LazyDatabase(() async {
       final dbFolder = await getApplicationDocumentsDirectory();
-      final file = File(p.join(dbFolder.path, '$name.sqlite'));
+      final file = File(p.join(dbFolder.path, 'kkaebom.sqlite'));
       return NativeDatabase.createInBackground(file);
     });
   }

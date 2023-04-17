@@ -5,7 +5,7 @@ import 'package:kkaebom/data/platform/database_open_connector.dart';
 class DatabaseOpenConnectorImpl extends DatabaseOpenConnector {
 
   @override
-  QueryExecutor openConnection(String name) {
-    return WebDatabase(name);
+  QueryExecutor openConnection() {
+    return WebDatabase("kkaebom");
   }
 }

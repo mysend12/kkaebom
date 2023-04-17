@@ -3,7 +3,7 @@ import 'package:kkaebom/data/platform/database_open_connector.dart';
 
 class DatabaseOpenConnectorImpl extends DatabaseOpenConnector {
   @override
-  QueryExecutor openConnection(String name) {
+  QueryExecutor openConnection() {
     throw Exception("Don't call this");
   }
 

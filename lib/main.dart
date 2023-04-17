@@ -1,12 +1,9 @@
-import 'package:dynamic_color/dynamic_color.dart';
-import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 import 'package:kkaebom/core/di/provider_setup.dart';
 import 'package:kkaebom/firebase_options.dart';
-import 'package:kkaebom/ui/shared/theme/colors.dart';
-import 'package:kkaebom/ui/view/home/home_view_model.dart';
+import 'package:kkaebom/ui/view/home/home.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -35,53 +32,8 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  static FirebaseAnalytics analytics = FirebaseAnalytics.instance;
-  static FirebaseAnalyticsObserver observer =
-      FirebaseAnalyticsObserver(analytics: analytics);
-
   @override
   Widget build(BuildContext context) {
-    final homeViewModel = context.watch<HomeViewModel>();
-
-    return DynamicColorBuilder(builder: (lightColorScheme, darkColorScheme) {
-      return MaterialApp(
-        title: 'Flutter Demo',
-        navigatorObservers: <NavigatorObserver>[observer],
-        debugShowCheckedModeBanner: false,
-        home: Column(
-          children: [
-            TextButton(
-              onPressed: () {
-                homeViewModel.sharedState.setI(
-                  homeViewModel.sharedState.i + 1
-                );
-              },
-              child: Text('Test: ${homeViewModel.test}'),
-            ),
-            TextButton(
-              onPressed: () {
-                changeBaseColor(Colors.blue);
-              },
-              child: const Text('blue'),
-            ),
-            TextButton(
-              onPressed: () {
-                changeBaseColor(Colors.red);
-              },
-              child: const Text('red'),
-            ),
-          ],
-        ),
-        theme: ThemeData(
-          colorScheme: lightColorScheme ?? lightModeColorScheme,
-          useMaterial3: true,
-        ),
-        darkTheme: ThemeData(
-          colorScheme: darkColorScheme ?? darkModeColorScheme,
-          useMaterial3: true,
-        ),
-        themeMode: ThemeMode.light,
-      );
-    });
+    return const Home();
   }
 }
