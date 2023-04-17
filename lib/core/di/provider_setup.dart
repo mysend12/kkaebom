@@ -11,6 +11,7 @@ import 'package:kkaebom/data/user/repository/user_repository.dart';
 import 'package:kkaebom/domain/user/use_case/user_use_case.dart';
 
 import 'package:kkaebom/ui/shared/shared_state.dart';
+import 'package:kkaebom/ui/shared/shared_view_model.dart';
 import 'package:kkaebom/ui/view/home/home_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
@@ -28,7 +29,8 @@ Future<List<SingleChildWidget>> getProviders() async {
   UserRepository userRepository = UserRepository(userDatabase);
   UserUseCase userUseCase = UserUseCase(userRepository);
 
-  SharedStateEntityData? sharedStateData = await sharedStateRepository.findLastData();
+  SharedStateEntityData? sharedStateData =
+      await sharedStateRepository.findLastData();
   sharedStateData ??= await sharedStateRepository.save(BaseColors.blueGrey);
 
   SharedState sharedState = SharedState(eventHub, sharedStateData.baseColor);
@@ -39,8 +41,14 @@ Future<List<SingleChildWidget>> getProviders() async {
     sharedState: sharedState,
     eventHub: eventHub,
   );
+  SharedViewModel sharedViewModel = SharedViewModel(
+    sharedStateRepository: sharedStateRepository,
+    sharedState: sharedState,
+    eventHub: eventHub,
+  );
 
   return [
+    ChangeNotifierProvider(create: (_) => sharedViewModel),
     ChangeNotifierProvider(create: (_) => homeViewModel),
   ];
 }
