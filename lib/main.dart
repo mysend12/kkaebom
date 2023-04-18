@@ -5,8 +5,9 @@ import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 import 'package:kkaebom/core/di/provider_setup.dart';
 import 'package:kkaebom/firebase_options.dart';
+import 'package:kkaebom/main2.dart';
+import 'package:kkaebom/ui/shared/routes.dart';
 import 'package:kkaebom/ui/shared/shared_view_model.dart';
-import 'package:kkaebom/ui/view/home/home.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -48,7 +49,8 @@ class MyApp extends StatelessWidget {
         title: 'Flutter Demo',
         navigatorObservers: <NavigatorObserver>[observer],
         debugShowCheckedModeBanner: false,
-        home: const Home(),
+        initialRoute: Main2.routeName,
+        routes: Routes.routes,
         theme: ThemeData(
           colorScheme: lightColorScheme ??
               sharedViewModel.sharedState.lightModeColorScheme,

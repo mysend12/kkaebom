@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
-import 'package:kkaebom/data/shared_state/model/base_colors.dart';
-import 'package:kkaebom/ui/shared/shared_view_model.dart';
-import 'package:provider/provider.dart';
+import 'package:kkaebom/ui/shared/widget/kkaebom_app_bar.dart';
+import 'package:kkaebom/ui/view/home/widget/address_button.dart';
+import 'package:kkaebom/ui/view/home/widget/shelter_search_bar.dart';
 
 class Home extends StatefulWidget {
+  static String routeName = "home";
+
   const Home({Key? key}) : super(key: key);
 
   @override
@@ -14,20 +15,30 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
-    final sharedViewModel = context.watch<SharedViewModel>();
-
     return SafeArea(
-      child: Scaffold(
-        body: ListView.builder(
-          itemCount: BaseColors.values.length,
-          itemBuilder: (BuildContext context, int index) {
-            return TextButton(
-              onPressed: () {
-                sharedViewModel.changeColor(BaseColors.values[index]);
-              },
-              child: Text(BaseColors.values[index].name),
-            );
-          },
+      child: GestureDetector(
+        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+        child: Scaffold(
+          appBar: KkaebomAppBar(
+            title: '보호소 찾기',
+            elevation: .4,
+          ),
+          body: SingleChildScrollView(
+            physics: const NeverScrollableScrollPhysics(),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Column(
+                children: const [
+                  SizedBox(
+                    height: 8,
+                  ),
+                  AddressButton(),
+                  SizedBox(height: 20),
+                  ShelterSearchBar(),
+                ],
+              ),
+            ),
+          ),
         ),
       ),
     );
