@@ -11,10 +11,12 @@ class SharedState {
   final EventHub _eventHub;
   late ColorScheme _lightModeColorScheme;
   late ColorScheme _darkModeColorScheme;
+  int _bottomNavigationIndex = 0;
 
   ColorScheme get lightModeColorScheme => _lightModeColorScheme;
-
   ColorScheme get darkModeColorScheme => _darkModeColorScheme;
+  int get bottomNavigationIndex => _bottomNavigationIndex;
+
 
   changeColor(BaseColors color) {
     MaterialColor materialColor = _baseColorToMaterialColor(color);
@@ -25,6 +27,10 @@ class SharedState {
         primarySwatch: createDarkModeMaterialColor(materialColor),
         backgroundColor: Colors.black12,
         brightness: Brightness.dark);
+  }
+
+  setBottomNavigationIndex(int index) {
+    _bottomNavigationIndex = index;
   }
 
   MaterialColor _baseColorToMaterialColor(BaseColors baseColor) {

@@ -28,6 +28,11 @@ class SharedViewModel extends ChangeNotifier {
     });
   }
 
+  void changeBottomNavigationIndex(int index) {
+    sharedState.setBottomNavigationIndex(index);
+    notifyListeners();
+  }
+
   @override
   void dispose() {
     super.dispose();
