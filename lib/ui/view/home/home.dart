@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kkaebom/ui/view/home/shelter_card_container.dart';
+import 'package:kkaebom/ui/view/home/shelter_card_list.dart';
 import 'package:kkaebom/ui/view/home/widget/address_button.dart';
 import 'package:kkaebom/ui/view/home/widget/shelter_search_bar.dart';
 
