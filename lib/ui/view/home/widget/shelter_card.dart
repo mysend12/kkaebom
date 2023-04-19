@@ -13,7 +13,11 @@ class ShelterCard extends StatelessWidget {
       height: 100,
       margin: const EdgeInsets.only(bottom: 10),
       decoration: BoxDecoration(
-        color: Theme.of(context).focusColor,
+        borderRadius: BorderRadius.circular(8.0),
+        border: Border.all(
+          width: .1,
+          color: Theme.of(context).primaryColor
+        )
       ),
       child: Row(
         children: [
@@ -35,9 +39,10 @@ class ShelterCard extends StatelessWidget {
             children: [
               const SizedBox(height: 20),
               Text(
-                '$index',
-                style: Theme.of(context).textTheme.displayMedium,
+                'ABCDEF $index',
+                style: Theme.of(context).textTheme.titleLarge,
               ),
+              const SizedBox(height: 10),
               Text(
                 '매일 오전, 오후, 낮, 새벽',
                 style: Theme.of(context).textTheme.bodyMedium,

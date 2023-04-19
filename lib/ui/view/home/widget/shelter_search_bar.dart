@@ -9,7 +9,7 @@ class ShelterSearchBar extends StatefulWidget {
 
 class _ShelterSearchBarState extends State<ShelterSearchBar> {
   TextEditingController shelterSearchController = TextEditingController();
-  bool isSuffixIcon = false;
+  bool isSuffixIcon = true;
 
   @override
   Widget build(BuildContext context) {
