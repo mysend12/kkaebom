@@ -25,6 +25,7 @@ dependencies:
   dynamic_color: ^1.6.3
   get_it: ^7.2.0
   event_hub: ^0.2.1
+  cached_network_image: ^3.2.3
 
 dev_dependencies:
   flutter_test:

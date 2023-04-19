@@ -1,10 +1,11 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class ShelterCard extends StatelessWidget {
   ShelterCard({Key? key, required this.index}) : super(key: key);
   int index;
 
-  String url =
+  String _url =
       'https://ichef.bbci.co.uk/news/800/cpsprodpb/E172/production/_126241775_getty_cats.png';
 
   @override
@@ -22,16 +23,21 @@ class ShelterCard extends StatelessWidget {
       child: Row(
         children: [
           const SizedBox(width: 12),
-          Container(
+          CachedNetworkImage(
+            imageUrl: _url,
             width: 76,
             height: 76,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              image: DecorationImage(
-                image: NetworkImage(url),
-                fit: BoxFit.fill,
-              ),
-            ),
+            imageBuilder: (_, imageProvider) {
+              return Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  image: DecorationImage(
+                    image: imageProvider,
+                    fit: BoxFit.fill,
+                  ),
+                ),
+              );
+            },
           ),
           const SizedBox(width: 16),
           Column(
