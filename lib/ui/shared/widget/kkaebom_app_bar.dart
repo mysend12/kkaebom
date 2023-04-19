@@ -30,7 +30,7 @@ class KkaebomAppBar extends StatelessWidget implements PreferredSizeWidget {
       titleSpacing: 32,
       title: isTitle
           ? Text(
-              '보호소 찾기',
+              title,
               style: Theme.of(context)
                   .textTheme
                   .bodyMedium

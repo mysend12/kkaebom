@@ -10,10 +10,16 @@ class InitScreen extends StatelessWidget {
   static String routeName = 'initScreen';
   InitScreen({Key? key}) : super(key: key);
 
-  List<Widget> widgets = [
+  List<Widget> tabs = [
     const Home(),
     Container(),
     Main2(),
+  ];
+
+  List<String> titles = [
+    '보호소 찾기',
+    '미정',
+    '임시 화면',
   ];
 
   @override
@@ -25,14 +31,14 @@ class InitScreen extends StatelessWidget {
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
         child: Scaffold(
           appBar: KkaebomAppBar(
-            title: '보호소 찾기',
+            title: titles[sharedViewModel.sharedState.bottomNavigationIndex],
             elevation: .4,
           ),
           body: SingleChildScrollView(
             physics: const NeverScrollableScrollPhysics(),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: widgets[sharedViewModel.sharedState.bottomNavigationIndex],
+              child: tabs[sharedViewModel.sharedState.bottomNavigationIndex],
             ),
           ),
           bottomNavigationBar: const KkaebomNavigationBar(),
