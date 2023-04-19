@@ -13,18 +13,18 @@ class Main2 extends StatefulWidget {
 
 class _Main2State extends State<Main2> {
   final GlobalKey globalKey = GlobalKey();
-  double containerHeight = 0;
+  double _height = 0;
 
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback(_getWidgetInfo);
+    WidgetsBinding.instance.addPostFrameCallback(_setHeight);
   }
 
-  void _getWidgetInfo(_) {
+  void _setHeight(_) {
     final renderBox = globalKey.currentContext?.findRenderObject() as RenderBox;
     setState(() {
-      containerHeight = MediaQuery.of(context).size.height -
+      _height = MediaQuery.of(context).size.height -
           renderBox.localToGlobal(Offset.zero).dy - KkaebomNavigationBar.height;
     });
   }
@@ -35,7 +35,7 @@ class _Main2State extends State<Main2> {
 
     return SizedBox(
       key: globalKey,
-      height: containerHeight,
+      height: _height,
       child: ListView.builder(
         itemCount: BaseColors.values.length,
         itemBuilder: (BuildContext context, int index) {

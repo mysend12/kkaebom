@@ -29,7 +29,7 @@ class _HomeState extends State<Home> {
                 SizedBox(height: 20),
                 ShelterSearchBar(),
                 SizedBox(height: 32),
-                ShelterCardContainer(),
+                ShelterCardList(),
               ],
             ),
           ),
