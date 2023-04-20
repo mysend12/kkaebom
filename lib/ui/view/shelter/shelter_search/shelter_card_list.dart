@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kkaebom/ui/shared/widget/kkaebom_navigation_bar.dart';
-import 'package:kkaebom/ui/view/home/widget/shelter_card.dart';
+import 'package:kkaebom/ui/view/shelter/shelter_search/widget/shelter_card.dart';
 
 class ShelterCardList extends StatefulWidget {
   const ShelterCardList({Key? key}) : super(key: key);

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:kkaebom/ui/view/home/shelter_card_list.dart';
-import 'package:kkaebom/ui/view/home/widget/address_button.dart';
-import 'package:kkaebom/ui/view/home/widget/address_select_area.dart';
-import 'package:kkaebom/ui/view/home/widget/shelter_search_bar.dart';
+import 'package:kkaebom/ui/view/shelter/shelter_search/shelter_card_list.dart';
+import 'package:kkaebom/ui/view/shelter/shelter_search/widget/address_button.dart';
+import 'package:kkaebom/ui/view/shelter/shelter_search/widget/address_select_area.dart';
+import 'package:kkaebom/ui/view/shelter/shelter_search/widget/shelter_search_bar.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);

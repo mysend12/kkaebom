@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:kkaebom/ui/view/home/widget/address_button.dart';
+import 'package:kkaebom/ui/view/shelter/shelter_search/widget/address_button.dart';
+
+import 'address_button.dart';
 
 class AddressSelectArea extends StatelessWidget {
   AddressSelectArea({Key? key}) : super(key: key);

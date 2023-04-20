@@ -12,7 +12,7 @@ import 'package:kkaebom/domain/user/use_case/user_use_case.dart';
 
 import 'package:kkaebom/ui/shared/shared_state.dart';
 import 'package:kkaebom/ui/shared/shared_view_model.dart';
-import 'package:kkaebom/ui/view/home/home_view_model.dart';
+import 'package:kkaebom/ui/view/shelter/shelter_search/home_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 

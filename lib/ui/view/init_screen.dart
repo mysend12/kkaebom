@@ -3,7 +3,7 @@ import 'package:kkaebom/main2.dart';
 import 'package:kkaebom/ui/shared/shared_view_model.dart';
 import 'package:kkaebom/ui/shared/widget/kkaebom_app_bar.dart';
 import 'package:kkaebom/ui/shared/widget/kkaebom_navigation_bar.dart';
-import 'package:kkaebom/ui/view/home/home.dart';
+import 'package:kkaebom/ui/view/shelter/shelter_search/shelter_search.dart';
 import 'package:provider/provider.dart';
 
 class InitScreen extends StatelessWidget {

@@ -30,7 +30,7 @@ class _KkaebomNavigationBarState extends State<KkaebomNavigationBar> {
         items: const [
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.add,
+              Icons.other_houses_outlined,
             ),
             label: '0',
           ),
