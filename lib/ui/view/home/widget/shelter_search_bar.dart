@@ -20,8 +20,10 @@ class _ShelterSearchBarState extends State<ShelterSearchBar> {
           setState(() => isSuffixIcon = !isSuffixIcon);
         }
       },
+      maxLength: 20,
       decoration: InputDecoration(
         hintText: '보호소명을 입력해주세요.',
+        counterText: '',
         hintStyle: Theme.of(context)
             .textTheme
             .bodyMedium
@@ -71,7 +73,7 @@ class _ShelterSearchBarState extends State<ShelterSearchBar> {
           ),
           gapPadding: 4,
         ),
-        fillColor: Theme.of(context).focusColor,
+        fillColor: Theme.of(context).hoverColor,
         filled: true,
       ),
     );

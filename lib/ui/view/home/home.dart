@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kkaebom/ui/view/home/shelter_card_list.dart';
 import 'package:kkaebom/ui/view/home/widget/address_button.dart';
+import 'package:kkaebom/ui/view/home/widget/address_select_area.dart';
 import 'package:kkaebom/ui/view/home/widget/shelter_search_bar.dart';
 
 class Home extends StatefulWidget {
@@ -11,6 +12,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  bool addressArea = false;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -21,20 +24,36 @@ class _HomeState extends State<Home> {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Column(
-              children: const [
-                SizedBox(
+              children: [
+                const SizedBox(
                   height: 8,
                 ),
-                AddressButton(),
-                SizedBox(height: 8),
-                ShelterSearchBar(),
-                SizedBox(height: 16),
-                ShelterCardList(),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: AddressButton(
+                    title: '경기도 성남시',
+                    isArrowButton: true,
+                    onPressed: () => showAddressList(context),
+                  ),
+                ),
+                const SizedBox(height: 8),
+                const ShelterSearchBar(),
+                const SizedBox(height: 16),
+                const ShelterCardList(),
               ],
             ),
           ),
         ),
       ),
+    );
+  }
+
+  void showAddressList(context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return AddressSelectArea();
+      },
     );
   }
 }

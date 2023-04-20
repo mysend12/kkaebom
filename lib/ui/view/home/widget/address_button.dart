@@ -1,29 +1,37 @@
 import 'package:flutter/material.dart';
 
 class AddressButton extends StatelessWidget {
-  const AddressButton({Key? key}) : super(key: key);
+  AddressButton({
+    Key? key,
+    required String title,
+    bool isArrowButton = false,
+    required onPressed,
+  })  : _title = title,
+        _onPressed = onPressed,
+        _isArrowButton = isArrowButton,
+        super(key: key);
+  final String _title;
+  final bool _isArrowButton;
+  final VoidCallback _onPressed;
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        ElevatedButton(
-          onPressed: () {},
-          child: Row(
-            children: [
-              Text(
-                '경기도 성남시',
-                style:
-                Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: Theme.of(context).primaryColor,
-                ),
-              ),
-              const Icon(Icons.arrow_drop_down),
-            ],
-          ),
+    return IntrinsicWidth(
+      child: ElevatedButton(
+        onPressed: _onPressed,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              _title,
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: Theme.of(context).primaryColor,
+                  ),
+            ),
+            if (_isArrowButton) const Icon(Icons.arrow_drop_down),
+          ],
         ),
-      ],
+      ),
     );
   }
 }

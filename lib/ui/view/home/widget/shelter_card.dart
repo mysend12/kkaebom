@@ -14,12 +14,8 @@ class ShelterCard extends StatelessWidget {
       height: 100,
       margin: const EdgeInsets.only(bottom: 10),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8.0),
-        border: Border.all(
-          width: .1,
-          color: Theme.of(context).primaryColor
-        )
-      ),
+          borderRadius: BorderRadius.circular(8.0),
+          border: Border.all(width: .1, color: Theme.of(context).primaryColor)),
       child: Row(
         children: [
           const SizedBox(width: 12),
@@ -27,6 +23,21 @@ class ShelterCard extends StatelessWidget {
             imageUrl: _url,
             width: 76,
             height: 76,
+            progressIndicatorBuilder: (_, url, download) {
+              if (download.progress != null) {
+                final percent = download.progress! * 100;
+                return Text(
+                  'progress: $percent%',
+                  style: Theme.of(context).textTheme.labelSmall,
+                );
+              }
+              return Center(
+                child: Text(
+                  'Loading...',
+                  style: Theme.of(context).textTheme.labelSmall,
+                ),
+              );
+            },
             imageBuilder: (_, imageProvider) {
               return Container(
                 decoration: BoxDecoration(
