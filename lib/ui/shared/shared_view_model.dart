@@ -1,8 +1,9 @@
 import 'package:event_hub/event_hub.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:kkaebom/data/shared_state/model/base_colors.dart';
-import 'package:kkaebom/data/shared_state/repository/shared_state_repository.dart';
-import 'package:kkaebom/ui/shared/shared_state.dart';
+
+import '../../data/shared_state/model/base_colors.dart';
+import '../../data/shared_state/repository/shared_state_repository.dart';
+import 'shared_state.dart';
 
 class SharedViewModel extends ChangeNotifier {
   SharedViewModel({

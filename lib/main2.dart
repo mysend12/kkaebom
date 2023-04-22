@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kkaebom/data/shared_state/model/base_colors.dart';
 import 'package:kkaebom/ui/shared/shared_view_model.dart';
-import 'package:kkaebom/ui/shared/widget/kkaebom_navigation_bar.dart';
+import 'package:kkaebom/ui/shared/widget/navigation_bar.dart';
 import 'package:provider/provider.dart';
 
 class Main2 extends StatefulWidget {

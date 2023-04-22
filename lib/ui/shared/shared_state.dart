@@ -1,7 +1,8 @@
 import 'package:event_hub/event_hub.dart';
 import 'package:flutter/material.dart';
-import 'package:kkaebom/data/shared_state/model/base_colors.dart';
-import 'package:kkaebom/ui/shared/theme/colors.dart';
+
+import '../../data/shared_state/model/base_colors.dart';
+import 'theme/colors.dart';
 
 class SharedState {
   SharedState(this._eventHub, BaseColors color) {

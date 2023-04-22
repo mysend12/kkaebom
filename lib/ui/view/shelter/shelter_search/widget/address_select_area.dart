@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:kkaebom/ui/view/shelter/shelter_search/widget/address_button.dart';
 
 import 'address_button.dart';
 
 class AddressSelectArea extends StatelessWidget {
   AddressSelectArea({Key? key}) : super(key: key);
 
-  List<String> title = [
+  final List<String> _title = [
     "서울특별시",
     "울산",
     "경기도 성남시",
@@ -36,7 +35,7 @@ class AddressSelectArea extends StatelessWidget {
           children: List.generate(
             7,
             (index) => AddressButton(
-              title: title[index],
+              title: _title[index],
               onPressed: () {},
             ),
           ),
