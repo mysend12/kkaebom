@@ -27,7 +27,7 @@ class KkaebomAppBar extends StatelessWidget implements PreferredSizeWidget {
               style: Theme.of(context)
                   .textTheme
                   .bodyMedium
-                  ?.copyWith(color: Theme.of(context).primaryColor),
+                  ?.copyWith(color: Theme.of(context).colorScheme.primary),
             ),
       actions: actions,
       elevation: elevation,

@@ -6,8 +6,8 @@ import '../../../../data/shared_state/repository/shared_state_repository.dart';
 import '../../../../domain/user/use_case/user_use_case.dart';
 import '../../../shared/shared_state.dart';
 
-class HomeViewModel extends ChangeNotifier {
-  HomeViewModel({
+class ShelterSearchViewModel extends ChangeNotifier {
+  ShelterSearchViewModel({
     required this.sharedStateRepository,
     required this.userUseCase,
     required this.sharedState,

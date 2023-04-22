@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../shared/safe_widget.dart';
 import 'shelter_card_list.dart';
 import 'widget/address_button.dart';
 import 'widget/address_select_area.dart';
@@ -18,26 +17,24 @@ class _ShelterSearchState extends State<ShelterSearch> {
 
   @override
   Widget build(BuildContext context) {
-    return KkaebomSafeWidget(
-      child: Column(
-        children: [
-          const SizedBox(
-            height: 8,
+    return Column(
+      children: [
+        const SizedBox(
+          height: 8,
+        ),
+        Align(
+          alignment: Alignment.centerRight,
+          child: AddressButton(
+            title: '경기도 성남시',
+            isArrowButton: true,
+            onPressed: () => showAddressList(context),
           ),
-          Align(
-            alignment: Alignment.centerRight,
-            child: AddressButton(
-              title: '경기도 성남시',
-              isArrowButton: true,
-              onPressed: () => showAddressList(context),
-            ),
-          ),
-          const SizedBox(height: 8),
-          const ShelterSearchBar(),
-          const SizedBox(height: 16),
-          const ShelterCardList(),
-        ],
-      ),
+        ),
+        const SizedBox(height: 8),
+        const ShelterSearchBar(),
+        const SizedBox(height: 16),
+        const ShelterCardList(),
+      ],
     );
   }
 

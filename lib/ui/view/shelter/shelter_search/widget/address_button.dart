@@ -25,7 +25,7 @@ class AddressButton extends StatelessWidget {
             Text(
               _title,
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: Theme.of(context).primaryColor,
+                    color: Theme.of(context).colorScheme.primary,
                   ),
             ),
             if (_isArrowButton) const Icon(Icons.arrow_drop_down),

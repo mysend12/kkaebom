@@ -27,14 +27,14 @@ class _ShelterSearchBarState extends State<ShelterSearchBar> {
         hintStyle: Theme.of(context)
             .textTheme
             .bodyMedium
-            ?.copyWith(color: Theme.of(context).disabledColor),
+            ?.copyWith(color: Theme.of(context).colorScheme.secondary),
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 8,
           vertical: 8,
         ),
         prefixIcon: Icon(
           Icons.search,
-          color: Theme.of(context).primaryColor,
+          color: Theme.of(context).colorScheme.primary,
         ),
         suffixIcon: Builder(
           builder: (context) {
@@ -48,7 +48,7 @@ class _ShelterSearchBarState extends State<ShelterSearchBar> {
               },
               icon: Icon(
                 Icons.highlight_remove_rounded,
-                color: Theme.of(context).primaryColor,
+                color: Theme.of(context).colorScheme.primary,
               ),
             );
           },
@@ -59,7 +59,7 @@ class _ShelterSearchBarState extends State<ShelterSearchBar> {
           ),
           borderSide: BorderSide(
             width: 1,
-            color: Theme.of(context).focusColor,
+            color: Theme.of(context).colorScheme.primary,
           ),
           gapPadding: 4,
         ),
@@ -69,11 +69,11 @@ class _ShelterSearchBarState extends State<ShelterSearchBar> {
           ),
           borderSide: BorderSide(
             width: 2,
-            color: Theme.of(context).focusColor,
+            color: Theme.of(context).colorScheme.primary,
           ),
           gapPadding: 4,
         ),
-        fillColor: Theme.of(context).hoverColor,
+        fillColor: Theme.of(context).colorScheme.background,
         filled: true,
       ),
     );

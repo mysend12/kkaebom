@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:kkaebom/ui/shared/safe_widget.dart';
 import 'package:provider/provider.dart';
 
 import '../../main2.dart';
 import '../shared/shared_view_model.dart';
 import '../shared/widget/app_bar.dart';
 import '../shared/widget/navigation_bar.dart';
-import 'chat/chat_list/chat_list.dart';
+import 'chat/chat_room_list/chat_room_list.dart';
 import 'shelter/shelter_search/shelter_search.dart';
 
 class InitScreen extends StatelessWidget {
@@ -15,7 +16,7 @@ class InitScreen extends StatelessWidget {
 
   final List<Widget> _tabs = [
     const ShelterSearch(),
-    const ChatList(),
+    const ChatRoomList(),
     Main2(),
   ];
 
@@ -39,7 +40,7 @@ class InitScreen extends StatelessWidget {
       IconButton(
         icon: Icon(
           Icons.menu,
-          color: Theme.of(context).unselectedWidgetColor,
+          color: Theme.of(context).colorScheme.primary,
         ),
         onPressed: () {
           print('click menu!!');
@@ -57,7 +58,7 @@ class InitScreen extends StatelessWidget {
           },
           icon: Icon(
             Icons.account_circle,
-            color: Theme.of(context).unselectedWidgetColor,
+            color: Theme.of(context).colorScheme.primary,
           ),
         ),
         const SizedBox(width: 16),
@@ -67,14 +68,14 @@ class InitScreen extends StatelessWidget {
           onPressed: () { print('click search!!'); },
           icon: Icon(
             Icons.search,
-            color: Theme.of(context).unselectedWidgetColor,
+            color: Theme.of(context).colorScheme.primary,
           ),
         ),
         IconButton(
           onPressed: () { print('click setting!!'); },
           icon: Icon(
             Icons.settings,
-            color: Theme.of(context).unselectedWidgetColor,
+            color: Theme.of(context).colorScheme.primary,
           ),
         ),
         const SizedBox(width: 16),
@@ -82,29 +83,21 @@ class InitScreen extends StatelessWidget {
       null
     ];
 
-    return SafeArea(
-      child: GestureDetector(
-        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-        child: Scaffold(
-          appBar: KkaebomAppBar(
-            title: _titles[sharedViewModel.sharedState.bottomNavigationIndex],
-            elevation: .4,
-            actions: actions[sharedViewModel.sharedState.bottomNavigationIndex],
-            leading:
-                leadings[sharedViewModel.sharedState.bottomNavigationIndex],
-          ),
-          body: SingleChildScrollView(
-            physics: const NeverScrollableScrollPhysics(),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: _tabs[sharedViewModel.sharedState.bottomNavigationIndex],
-            ),
-          ),
-          bottomNavigationBar: KkaebomNavigationBar(
-            tabIcons: _tabIcons,
-          ),
-        ),
+    return KkaebomSafeWidget(
+      appBar: KkaebomAppBar(
+        title: _titles[sharedViewModel.sharedState.bottomNavigationIndex],
+        elevation: .4,
+        actions: actions[sharedViewModel.sharedState.bottomNavigationIndex],
+        leading:
+            leadings[sharedViewModel.sharedState.bottomNavigationIndex],
       ),
+      physics: const NeverScrollableScrollPhysics(),
+      vertical: 0,
+      horizontal: 16,
+      bottomNavigationBar: KkaebomNavigationBar(
+        tabIcons: _tabIcons,
+      ),
+      child: _tabs[sharedViewModel.sharedState.bottomNavigationIndex],
     );
   }
 }

@@ -25,7 +25,7 @@ class AddressSelectArea extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(16.0),
         decoration: BoxDecoration(
-          color: Theme.of(context).canvasColor,
+          color: Theme.of(context).colorScheme.background,
           borderRadius: BorderRadius.circular(10.0),
         ),
         child: Wrap(

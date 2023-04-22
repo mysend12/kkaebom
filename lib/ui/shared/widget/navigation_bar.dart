@@ -25,7 +25,7 @@ class _KkaebomNavigationBarState extends State<KkaebomNavigationBar> {
         showUnselectedLabels: false,
         currentIndex: sharedViewModel.sharedState.bottomNavigationIndex,
         enableFeedback: false,
-        selectedItemColor: Theme.of(context).primaryColor,
+        selectedItemColor: Theme.of(context).colorScheme.primary,
         onTap: (index) {
           sharedViewModel.changeBottomNavigationIndex(index);
         },

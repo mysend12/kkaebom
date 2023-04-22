@@ -15,7 +15,7 @@ class ShelterCard extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 10),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8.0),
-          border: Border.all(width: .1, color: Theme.of(context).primaryColor)),
+          border: Border.all(width: .1, color: Theme.of(context).colorScheme.primary)),
       child: Row(
         children: [
           const SizedBox(width: 12),

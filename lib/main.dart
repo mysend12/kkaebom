@@ -58,8 +58,7 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
         ),
         darkTheme: ThemeData(
-          colorScheme: darkColorScheme ??
-              sharedViewModel.sharedState.darkModeColorScheme,
+          colorScheme: darkColorScheme,
           useMaterial3: true,
         ),
         themeMode: ThemeMode.light,
