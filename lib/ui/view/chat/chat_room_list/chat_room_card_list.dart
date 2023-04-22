@@ -40,15 +40,14 @@ class _ChatRoomCardListState extends State<ChatRoomCardList> {
       child: ListView.builder(
         itemBuilder: (_, index) {
           return ChatRoomCard(
-            title: 'title....',
+            title: '제목제목제목제',
             url: _url,
-            lastMessage: '마지막 메시지입니다...',
+            lastMessage: '마지막 메시지입니다마지막 메시지입니다마지막 메시지입니다마지막 메시지입니다마지막 메시지입니다마지막 메시지입니다마지막 메시지입니다',
             lastMessageTime: '오후 08:00',
-            unReadCount: index,
+            unReadCount: index + ((index - 1) * 10),
           );
         },
-        itemCount: 20,
-        physics: AlwaysScrollableScrollPhysics(),
+        itemCount: 3,
       ),
     );
   }

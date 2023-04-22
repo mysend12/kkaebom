@@ -5,13 +5,13 @@ class ChatRoomCard extends StatelessWidget {
   ChatRoomCard({
     Key? key,
     required title,
-    required unReadCount,
+    required int unReadCount,
     required lastMessageTime,
-    required lastMessage,
+    required String lastMessage,
     required url,
   })  : _title = title,
-        _unReadCount = unReadCount,
-        _lastMessage = lastMessage,
+        _unReadCount = unReadCount < 100 ? unReadCount : 99,
+        _lastMessage = lastMessage.length < 20 ? lastMessage : '${lastMessage.substring(0, 20)}...',
         _lastMessageTime = lastMessageTime,
         _url = url,
         super(key: key);
@@ -25,7 +25,7 @@ class ChatRoomCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 80,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -88,12 +88,12 @@ class ChatRoomCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Text(_lastMessageTime),
+              Text(_lastMessageTime, style: Theme.of(context).textTheme.labelSmall,),
               Container(
-                width: 16,
-                height: 16,
+                width: 24,
+                height: 24,
                 margin: const EdgeInsets.only(right: 4),
-                child: _unReadCount == 0
+                child: _unReadCount <= 0
                     ? Container()
                     : CircleAvatar(
                         backgroundColor: Theme.of(context).colorScheme.primaryContainer,
