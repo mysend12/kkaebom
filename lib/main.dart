@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'core/di/provider_setup.dart';
+import 'core/env.dart';
 import 'firebase_options.dart';
 import 'ui/shared/routes.dart';
 import 'ui/shared/shared_view_model.dart';
@@ -25,6 +26,10 @@ void main() async {
 
   String apiUrl = remoteConfig.getString('apiUrl');
   remoteConfig.fetchAndActivate();
+  print('apiUrl: $apiUrl');
+
+  Environment environment = Environment();
+  env = await environment.getEnvironment();
 
   runApp(
     MultiProvider(
@@ -33,6 +38,7 @@ void main() async {
     ),
   );
 }
+dynamic env;
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -47,9 +53,8 @@ class MyApp extends StatelessWidget {
 
     return DynamicColorBuilder(builder: (lightColorScheme, darkColorScheme) {
       return MaterialApp(
-        title: 'Flutter Demo',
+        title: '깨봄이',
         navigatorObservers: <NavigatorObserver>[observer],
-        debugShowCheckedModeBanner: false,
         initialRoute: InitScreen.routeName,
         routes: Routes.routes,
         theme: ThemeData(

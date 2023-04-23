@@ -26,6 +26,7 @@ dependencies:
   get_it: ^7.2.0
   event_hub: ^0.2.1
   cached_network_image: ^3.2.3
+  yaml: ^3.1.1
 
 dev_dependencies:
   flutter_test:
@@ -38,6 +39,7 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-#   assets:
-#     - images/a_dot_burr.jpeg
-#     - images/a_dot_ham.jpeg
+  assets:
+    - application-profile.yaml
+    - application-debug.yaml
+    - application-release.yaml

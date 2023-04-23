@@ -4,6 +4,8 @@ import 'package:kkaebom/ui/shared/shared_view_model.dart';
 import 'package:kkaebom/ui/shared/widget/navigation_bar.dart';
 import 'package:provider/provider.dart';
 
+import 'main.dart';
+
 class Main2 extends StatefulWidget {
   Main2({Key? key}) : super(key: key);
 
@@ -43,7 +45,7 @@ class _Main2State extends State<Main2> {
             onPressed: () {
               sharedViewModel.changeColor(BaseColors.values[index]);
             },
-            child: Text(BaseColors.values[index].name),
+            child: Text('${env['name']} ${BaseColors.values[index].name}'),
           );
         },
       ),
