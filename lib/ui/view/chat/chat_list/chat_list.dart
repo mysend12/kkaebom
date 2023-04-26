@@ -20,6 +20,7 @@ class _ChatListState extends State<ChatList> {
   String _url =
       'https://ichef.bbci.co.uk/news/800/cpsprodpb/E172/production/_126241775_getty_cats.png';
 
+  String _url2 = 'https://static01.nyt.com/images/2016/03/30/universal/ko/well_cat-korean/well_cat-articleLarge-v2.jpg?quality=75&auto=webp&disable=upscale';
   final GlobalKey _key = GlobalKey();
   double _height = 0;
 
@@ -91,6 +92,7 @@ class _ChatListState extends State<ChatList> {
               content: content,
               chatType:
                   index == 2 || index == 8 ? ChatType.IMAGE : ChatType.TEXT,
+              fileLink: index == 8 ? _url2 : null,
             );
           },
           itemCount: 10,

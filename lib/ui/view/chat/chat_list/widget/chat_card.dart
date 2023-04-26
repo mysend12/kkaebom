@@ -37,7 +37,7 @@ class ChatCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (_chatType == ChatType.IMAGE) {
+    if (_chatType == ChatType.IMAGE && _fileLink == null) {
       _fileLink = _profileImageUrl;
     }
 
@@ -139,12 +139,15 @@ class ChatCard extends StatelessWidget {
 
   Widget imageMessage(context) {
     return GestureDetector(
+      onTap: () {
+        print('click!!');
+      },
       child: Container(
         constraints: BoxConstraints(
           minWidth: 10,
           maxWidth: MediaQuery.of(context).size.width * .7,
           minHeight: 10,
-          maxHeight: MediaQuery.of(context).size.height * .4,
+          maxHeight: MediaQuery.of(context).size.height * .3,
         ),
         decoration: BoxDecoration(
           shape: BoxShape.rectangle,
@@ -153,6 +156,7 @@ class ChatCard extends StatelessWidget {
             image: NetworkImage(
               _fileLink!,
             ),
+            alignment: Alignment.topLeft
           ),
         ),
       ),
