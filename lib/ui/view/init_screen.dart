@@ -86,14 +86,10 @@ class InitScreen extends StatelessWidget {
     return KkaebomSafeWidget(
       appBar: KkaebomAppBar(
         title: _titles[sharedViewModel.sharedState.bottomNavigationIndex],
-        elevation: .4,
         actions: actions[sharedViewModel.sharedState.bottomNavigationIndex],
         leading:
             leadings[sharedViewModel.sharedState.bottomNavigationIndex],
       ),
-      physics: const NeverScrollableScrollPhysics(),
-      vertical: 0,
-      horizontal: 16,
       bottomNavigationBar: KkaebomNavigationBar(
         tabIcons: _tabIcons,
       ),

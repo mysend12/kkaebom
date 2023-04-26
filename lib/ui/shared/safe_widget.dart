@@ -8,7 +8,7 @@ class KkaebomSafeWidget extends StatelessWidget {
     Key? key,
     required this.child,
     required this.appBar,
-    required this.bottomNavigationBar,
+    this.bottomNavigationBar,
     this.physics = const NeverScrollableScrollPhysics(),
     this.horizontal = 16.0,
     this.vertical = 0.0,
@@ -18,7 +18,7 @@ class KkaebomSafeWidget extends StatelessWidget {
   final double horizontal;
   final double vertical;
   final KkaebomAppBar appBar;
-  final KkaebomNavigationBar bottomNavigationBar;
+  final KkaebomNavigationBar? bottomNavigationBar;
 
   @override
   Widget build(BuildContext context) {

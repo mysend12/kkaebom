@@ -5,7 +5,7 @@ class KkaebomAppBar extends StatelessWidget implements PreferredSizeWidget {
     Key? key,
     this.title,
     this.leading,
-    this.elevation = 0.0,
+    this.elevation = 0.4,
     this.actions,
   }) : super(key: key);
 
