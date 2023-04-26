@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:path/path.dart';
 
 import '../chat_type.dart';
 
@@ -16,7 +15,7 @@ class ChatCard extends StatelessWidget {
     List<String>? images,
     String? fileLink,
   })  : _isMyChat = isMyChat,
-        _notReadCount = notReadCount,
+        _notReadCount = notReadCount >= 100 ? 99 : notReadCount,
         _profileImageUrl = profileImageUrl,
         _nickname = nickname,
         _chatType = chatType,
@@ -95,7 +94,24 @@ class ChatCard extends StatelessWidget {
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                 ),
-              message(context),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  if (_isMyChat)
+                    Text(
+                      '$_notReadCount',
+                      style: Theme.of(context).textTheme.labelSmall,
+                    ),
+                  if (_isMyChat) const SizedBox(width: 10),
+                  message(context),
+                  if (!_isMyChat) const SizedBox(width: 10),
+                  if (!_isMyChat)
+                    Text(
+                      '$_notReadCount',
+                      style: Theme.of(context).textTheme.labelSmall,
+                    )
+                ],
+              ),
             ],
           ),
         ],
@@ -110,9 +126,9 @@ class ChatCard extends StatelessWidget {
       case ChatType.IMAGE:
         return imageMessage(context);
       case ChatType.IMAGE_LIST:
-        return imageListMessage();
+        return imageListMessage(context);
       case ChatType.VIDEO:
-        return vodMessage();
+        return vodMessage(context);
     }
   }
 
@@ -120,6 +136,7 @@ class ChatCard extends StatelessWidget {
     return Container(
       constraints: BoxConstraints(
         minWidth: 10,
+        minHeight: 10,
         maxWidth: MediaQuery.of(context).size.width * .7,
       ),
       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
@@ -145,29 +162,73 @@ class ChatCard extends StatelessWidget {
       child: Container(
         constraints: BoxConstraints(
           minWidth: 10,
-          maxWidth: MediaQuery.of(context).size.width * .7,
           minHeight: 10,
-          maxHeight: MediaQuery.of(context).size.height * .3,
+          maxWidth: MediaQuery.of(context).size.width * .7,
+          maxHeight: MediaQuery.of(context).size.height * .4,
         ),
-        decoration: BoxDecoration(
-          shape: BoxShape.rectangle,
+        child: ClipRRect(
           borderRadius: BorderRadius.circular(8),
-          image: DecorationImage(
-            image: NetworkImage(
-              _fileLink!,
-            ),
-            alignment: Alignment.topLeft
+          child: Image.network(
+            _fileLink!,
+            fit: BoxFit.fill,
           ),
         ),
       ),
     );
   }
 
-  Widget imageListMessage() {
-    return Container();
+  Widget imageListMessage(context) {
+    double bigImageSize = MediaQuery.of(context).size.width * .7 * .5;
+    double smallImageSize = MediaQuery.of(context).size.width * .7 * .3333333;
+
+    double imageSize = 0;
+    int changeSizeIndex = -1;
+
+    if (_images!.length == 2) {
+      imageSize = bigImageSize;
+    } else if (_images!.length == 3) {
+      imageSize = smallImageSize;
+    } else if (_images!.length == 4) {
+      imageSize = bigImageSize;
+    } else {
+      if (_images!.length % 3 == 1) {
+        changeSizeIndex = _images!.length - 4;
+      } else if (_images!.length % 3 == 2) {
+        changeSizeIndex = _images!.length - 2;
+      } else {
+        imageSize = smallImageSize;
+      }
+    }
+
+    return Container(
+      width: MediaQuery.of(context).size.width * .7,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Wrap(
+        direction: Axis.horizontal,
+        spacing: 0,
+        runSpacing: 0,
+        children: List.generate(_images!.length, (index) {
+          return GestureDetector(
+            onTap: () {
+              print('click $index');
+            },
+            child: SizedBox(
+              width: changeSizeIndex == -1 ? imageSize : index < changeSizeIndex ? smallImageSize : bigImageSize,
+              height: changeSizeIndex == -1 ? imageSize : smallImageSize,
+              child: Image.network(
+                _images![index],
+                fit: BoxFit.fill,
+              ),
+            ),
+          );
+        }),
+      ),
+    );
   }
 
-  Widget vodMessage() {
+  Widget vodMessage(context) {
     return Container();
   }
 }

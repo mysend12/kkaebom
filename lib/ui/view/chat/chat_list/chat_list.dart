@@ -6,6 +6,7 @@ import 'package:kkaebom/ui/view/chat/chat_list/chat_type.dart';
 import 'package:kkaebom/ui/view/chat/chat_list/widget/chat_card.dart';
 
 import '../../../shared/widget/app_bar.dart';
+import 'widget/ChatInputBar.dart';
 
 class ChatList extends StatefulWidget {
   static String routeName = 'chatList';
@@ -20,7 +21,8 @@ class _ChatListState extends State<ChatList> {
   String _url =
       'https://ichef.bbci.co.uk/news/800/cpsprodpb/E172/production/_126241775_getty_cats.png';
 
-  String _url2 = 'https://static01.nyt.com/images/2016/03/30/universal/ko/well_cat-korean/well_cat-articleLarge-v2.jpg?quality=75&auto=webp&disable=upscale';
+  String _url2 =
+      'https://static01.nyt.com/images/2016/03/30/universal/ko/well_cat-korean/well_cat-articleLarge-v2.jpg?quality=75&auto=webp&disable=upscale';
   final GlobalKey _key = GlobalKey();
   double _height = 0;
 
@@ -37,9 +39,12 @@ class _ChatListState extends State<ChatList> {
     final renderBox = _key.currentContext?.findRenderObject() as RenderBox;
     setState(() {
       _height = MediaQuery.of(context).size.height -
-          renderBox.localToGlobal(Offset.zero).dy;
+          renderBox.localToGlobal(Offset.zero).dy -
+          80;
     });
   }
+
+  TextEditingController chatInputController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +57,7 @@ class _ChatListState extends State<ChatList> {
             onPressed: () {
               print('click chat search');
             },
-            icon: Icon(Icons.search),
+            icon: const Icon(Icons.search),
             color: Theme.of(context).colorScheme.primary,
           ),
           IconButton(
@@ -67,36 +72,59 @@ class _ChatListState extends State<ChatList> {
           ),
         ],
       ),
-      child: Container(
-        color: Theme.of(context).colorScheme.secondary.withOpacity(.1),
+      child: Column(
         key: _key,
-        height: _height,
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: ListView.builder(
-          itemBuilder: (_, index) {
-            var random = Random();
-            int contentLength = random.nextInt(1000);
-            var min = 0x21; //start ascii  사용할 아스키 문자의 시작
-            var max = 0x7A; //end ascii    사용할 아스키 문자의 끝
+        children: [
+          Container(
+            color: Theme.of(context).colorScheme.secondary.withOpacity(.1),
+            height: _height,
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: ListView.builder(
+              itemBuilder: (_, index) {
+                var random = Random();
+                int contentLength = random.nextInt(1000);
+                var min = 0x21; //start ascii  사용할 아스키 문자의 시작
+                var max = 0x7A; //end ascii    사용할 아스키 문자의 끝
 
-            String content = '';
-            for (int index=0; index<contentLength; index++) {
-              content += String.fromCharCode(min + random.nextInt(max - min));
-            }
+                String content = '';
+                for (int index = 0; index < contentLength; index++) {
+                  content +=
+                      String.fromCharCode(min + random.nextInt(max - min));
+                }
 
-            return ChatCard(
-              notReadCount: 1,
-              profileImageUrl: _url,
-              isMyChat: index == 3,
-              nickname: index == 3 ? null : 'nickname$index',
-              content: content,
-              chatType:
-                  index == 2 || index == 8 ? ChatType.IMAGE : ChatType.TEXT,
-              fileLink: index == 8 ? _url2 : null,
-            );
-          },
-          itemCount: 10,
-        ),
+                return ChatCard(
+                  notReadCount: random.nextInt(120),
+                  profileImageUrl: _url,
+                  isMyChat: index == 3,
+                  nickname: index == 3 ? null : 'nickname$index',
+                  content: content,
+                  chatType: index == 2 || index == 8
+                      ? ChatType.IMAGE
+                      : index == 4
+                          ? ChatType.IMAGE_LIST
+                          : ChatType.TEXT,
+                  fileLink: index == 8 ? _url2 : null,
+                  images: [
+                    _url,
+                    _url2,
+                    _url,
+                    _url2,
+                    _url,
+                    _url2,
+                    _url,
+                    _url2,
+                    _url,
+                    _url2
+                  ],
+                );
+              },
+              itemCount: 10,
+            ),
+          ),
+          ChatInputBar(
+            chatInputController: chatInputController,
+          ),
+        ],
       ),
     );
   }
