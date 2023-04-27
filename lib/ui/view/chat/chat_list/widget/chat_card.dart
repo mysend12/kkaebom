@@ -159,18 +159,21 @@ class ChatCard extends StatelessWidget {
       onTap: () {
         print('click!!');
       },
-      child: Container(
-        constraints: BoxConstraints(
-          minWidth: 10,
-          minHeight: 10,
-          maxWidth: MediaQuery.of(context).size.width * .7,
-          maxHeight: MediaQuery.of(context).size.height * .4,
-        ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(8),
-          child: Image.network(
-            _fileLink!,
-            fit: BoxFit.fill,
+      child: Align(
+        alignment: _isMyChat ? Alignment.topRight : Alignment.topLeft,
+        child: Container(
+          constraints: BoxConstraints(
+            minWidth: 10,
+            minHeight: 10,
+            maxWidth: MediaQuery.of(context).size.width * .7,
+            maxHeight: MediaQuery.of(context).size.height * .4,
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(8),
+            child: Image.network(
+              _fileLink!,
+              fit: BoxFit.fill,
+            ),
           ),
         ),
       ),

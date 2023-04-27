@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -33,6 +34,8 @@ class _ChatListState extends State<ChatList> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback(_setHeight);
+    WidgetsBinding.instance.addPostFrameCallback(_setChat);
+    WidgetsBinding.instance.addPostFrameCallback(_setPosition);
   }
 
   void _setHeight(_) {
@@ -44,7 +47,74 @@ class _ChatListState extends State<ChatList> {
     });
   }
 
+  void _setChat(_) {
+    var random = Random();
+    int length = random.nextInt(400);
+    length = length < 40 ? 40 : length;
+
+    var min = 0x21; //start ascii  사용할 아스키 문자의 시작
+    var max = 0x7A; //end ascii    사용할 아스키 문자의 끝
+
+    for (int index = 0; index < length; index++) {
+      int contentLength = random.nextInt(1000);
+      String content = '';
+      for (int index = 0; index < contentLength; index++) {
+        content += String.fromCharCode(min + random.nextInt(max - min));
+      }
+
+      int typeIndex = random.nextInt(10);
+      ChatType type = ChatType.TEXT;
+      if (typeIndex <2) {
+        type = ChatType.IMAGE_LIST;
+      } else if (typeIndex < 5) {
+        type = ChatType.IMAGE;
+      } else if (typeIndex < 8) {
+        type = ChatType.TEXT;
+      } else {
+        // type = ChatType.VIDEO;
+      }
+
+      List<String> images = [];
+      if (type == ChatType.IMAGE_LIST) {
+      for (int i = 0; i < random.nextInt(20); i++) {
+          if (random.nextBool()) {
+            images.add(_url);
+          } else {
+            images.add(_url2);
+          }
+        }
+      }
+
+      bool isMyChat = random.nextBool();
+
+      chatList.add(
+        ChatCard(
+          notReadCount: random.nextInt(120),
+          profileImageUrl: _url,
+          isMyChat: isMyChat,
+          nickname: isMyChat ? null : 'nickname$index',
+          content: content,
+          chatType: type,
+          fileLink: _url,
+          images: images,
+        ),
+      );
+    }
+  }
+
+  void _setPosition(_) {
+    if (scrollController.hasClients) {
+      Future.delayed(const Duration(milliseconds: 50)).then((value) {
+        final position = scrollController.position.maxScrollExtent;
+        scrollController.jumpTo(position);
+        print(position);
+      });
+    }
+  }
+
   TextEditingController chatInputController = TextEditingController();
+  ScrollController scrollController = ScrollController();
+  List<ChatCard> chatList = [];
 
   @override
   Widget build(BuildContext context) {
@@ -80,45 +150,9 @@ class _ChatListState extends State<ChatList> {
             height: _height,
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: ListView.builder(
-              itemBuilder: (_, index) {
-                var random = Random();
-                int contentLength = random.nextInt(1000);
-                var min = 0x21; //start ascii  사용할 아스키 문자의 시작
-                var max = 0x7A; //end ascii    사용할 아스키 문자의 끝
-
-                String content = '';
-                for (int index = 0; index < contentLength; index++) {
-                  content +=
-                      String.fromCharCode(min + random.nextInt(max - min));
-                }
-
-                return ChatCard(
-                  notReadCount: random.nextInt(120),
-                  profileImageUrl: _url,
-                  isMyChat: index == 3,
-                  nickname: index == 3 ? null : 'nickname$index',
-                  content: content,
-                  chatType: index == 2 || index == 8
-                      ? ChatType.IMAGE
-                      : index == 4
-                          ? ChatType.IMAGE_LIST
-                          : ChatType.TEXT,
-                  fileLink: index == 8 ? _url2 : null,
-                  images: [
-                    _url,
-                    _url2,
-                    _url,
-                    _url2,
-                    _url,
-                    _url2,
-                    _url,
-                    _url2,
-                    _url,
-                    _url2
-                  ],
-                );
-              },
-              itemCount: 10,
+              controller: scrollController,
+              itemBuilder: (_, index) => chatList[index],
+              itemCount: chatList.length,
             ),
           ),
           ChatInputBar(
