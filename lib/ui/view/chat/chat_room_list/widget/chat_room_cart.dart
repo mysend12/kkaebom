@@ -12,7 +12,7 @@ class ChatRoomCard extends StatelessWidget {
     required url,
   })  : _title = title,
         _unReadCount = unReadCount < 100 ? unReadCount : 99,
-        _lastMessage = lastMessage.length < 20 ? lastMessage : '${lastMessage.substring(0, 20)}...',
+        _lastMessage = lastMessage,
         _lastMessageTime = lastMessageTime,
         _url = url,
         super(key: key);
@@ -31,11 +31,7 @@ class ChatRoomCard extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => ChatList()
-              )
-          );
+              context, MaterialPageRoute(builder: (context) => ChatList()));
         },
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -79,26 +75,38 @@ class ChatRoomCard extends StatelessWidget {
                 },
               ),
             ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  _title,
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
-                Text(
-                  _lastMessage,
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ),
-              ],
+            SizedBox(
+              width: MediaQuery.of(context).size.width * .55,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    _title,
+                    style: Theme.of(context).textTheme.titleMedium,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                  ),
+                  Text(
+                    _lastMessage,
+                    style: Theme.of(context).textTheme.bodyMedium,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                  ),
+                ],
+              ),
             ),
             Expanded(child: Container()),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(_lastMessageTime, style: Theme.of(context).textTheme.labelSmall,),
+                SizedBox(
+                  child: Text(
+                    _lastMessageTime,
+                    style: Theme.of(context).textTheme.labelSmall,
+                  ),
+                ),
                 Container(
                   width: 24,
                   height: 24,
@@ -106,13 +114,17 @@ class ChatRoomCard extends StatelessWidget {
                   child: _unReadCount <= 0
                       ? Container()
                       : CircleAvatar(
-                          backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+                          backgroundColor:
+                              Theme.of(context).colorScheme.primaryContainer,
                           child: Text(
                             '$_unReadCount',
                             style: Theme.of(context)
                                 .textTheme
                                 .labelSmall
-                                ?.copyWith(color: Theme.of(context).colorScheme.background),
+                                ?.copyWith(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .background),
                           ),
                         ),
                 ),
