@@ -99,7 +99,7 @@ class ChatRoomCard extends StatelessWidget {
             Expanded(child: Container()),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 SizedBox(
                   child: Text(
