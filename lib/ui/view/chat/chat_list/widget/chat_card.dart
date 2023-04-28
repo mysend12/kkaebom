@@ -137,7 +137,7 @@ class ChatCard extends StatelessWidget {
       constraints: BoxConstraints(
         minWidth: 10,
         minHeight: 10,
-        maxWidth: MediaQuery.of(context).size.width * .7,
+        maxWidth: MediaQuery.of(context).size.width * .6,
       ),
       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
       decoration: BoxDecoration(
@@ -165,7 +165,7 @@ class ChatCard extends StatelessWidget {
           constraints: BoxConstraints(
             minWidth: 10,
             minHeight: 10,
-            maxWidth: MediaQuery.of(context).size.width * .7,
+            maxWidth: MediaQuery.of(context).size.width * .6,
             maxHeight: MediaQuery.of(context).size.height * .4,
           ),
           child: ClipRRect(
@@ -181,8 +181,8 @@ class ChatCard extends StatelessWidget {
   }
 
   Widget imageListMessage(context) {
-    double bigImageSize = MediaQuery.of(context).size.width * .7 * .5;
-    double smallImageSize = MediaQuery.of(context).size.width * .7 * .3333333;
+    double bigImageSize = MediaQuery.of(context).size.width * .6 * .5;
+    double smallImageSize = MediaQuery.of(context).size.width * .6 * .3333333;
 
     double imageSize = 0;
     int changeSizeIndex = -1;

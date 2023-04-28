@@ -7,7 +7,7 @@ import 'package:kkaebom/ui/view/chat/chat_list/chat_type.dart';
 import 'package:kkaebom/ui/view/chat/chat_list/widget/chat_card.dart';
 
 import '../../../shared/widget/app_bar.dart';
-import 'widget/ChatInputBar.dart';
+import 'widget/chat_input_bar.dart';
 
 class ChatList extends StatefulWidget {
   static String routeName = 'chatList';
@@ -49,7 +49,7 @@ class _ChatListState extends State<ChatList> {
 
   void _setChat(_) {
     var random = Random();
-    int length = random.nextInt(400);
+    int length = random.nextInt(100);
     length = length < 40 ? 40 : length;
 
     var min = 0x21; //start ascii  사용할 아스키 문자의 시작

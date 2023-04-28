@@ -4,7 +4,8 @@ class ChatInputBar extends StatefulWidget {
   ChatInputBar({
     Key? key,
     required TextEditingController chatInputController,
-  }) : _chatInputController = chatInputController, super(key: key);
+  })  : _chatInputController = chatInputController,
+        super(key: key);
   final TextEditingController _chatInputController;
 
   @override
@@ -14,6 +15,7 @@ class ChatInputBar extends StatefulWidget {
 class _ChatInputBarState extends State<ChatInputBar> {
   bool isSubmitButton = false;
   double inputWidth = 0;
+  double inputButtonWidth = 80;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,7 @@ class _ChatInputBarState extends State<ChatInputBar> {
     return Row(
       children: [
         Container(
-          width: inputWidth,
+          width: isSubmitButton ? inputWidth - inputButtonWidth : inputWidth,
           constraints: const BoxConstraints(
             minHeight: 50,
             maxHeight: 8 * 24,
@@ -32,14 +34,13 @@ class _ChatInputBarState extends State<ChatInputBar> {
             keyboardType: TextInputType.multiline,
             maxLines: null,
             onChanged: (text) {
-              if (widget._chatInputController.text.trim().isEmpty ==
-                  isSubmitButton) {
-                setState(() {
-                  isSubmitButton = !isSubmitButton;
-                  inputWidth =
-                      isSubmitButton ? inputWidth - 50 : inputWidth + 50;
-                });
-              }
+              setState(() {
+                if (text.trim().isEmpty) {
+                  isSubmitButton = false;
+                } else if (text.trim().isNotEmpty) {
+                  isSubmitButton = true;
+                }
+              });
             },
             decoration: InputDecoration(
               counterText: '',
@@ -73,18 +74,29 @@ class _ChatInputBarState extends State<ChatInputBar> {
           ),
         ),
         if (isSubmitButton)
-          ElevatedButton(
-            onPressed: () {
-              print('submit!!');
-            },
-            child: Container(
-              width: 50,
-              constraints: BoxConstraints(
-                minHeight: 50,
-                maxHeight: 300,
+          Row(
+            children: [
+              SizedBox(
+                width: 40,
+                child: IconButton(
+                  color: Theme.of(context).colorScheme.primary,
+                  onPressed: () {
+                    print('plus!!');
+                  },
+                  icon: const Icon(Icons.add_circle, size: 24,),
+                ),
               ),
-              child: Text('submit'),
-            ),
+              SizedBox(
+                width: 40,
+                child: IconButton(
+                  color: Theme.of(context).colorScheme.primary,
+                  onPressed: () {
+                    print('submit!!');
+                  },
+                  icon: const Icon(Icons.check_circle, size: 24,),
+                ),
+              ),
+            ],
           ),
       ],
     );
