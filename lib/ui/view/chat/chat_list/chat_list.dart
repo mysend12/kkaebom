@@ -64,24 +64,23 @@ class _ChatListState extends State<ChatList> {
 
       int typeIndex = random.nextInt(10);
       ChatType type = ChatType.TEXT;
-      if (typeIndex <2) {
-        type = ChatType.IMAGE_LIST;
-      } else if (typeIndex < 5) {
+      if (typeIndex < 5) {
         type = ChatType.IMAGE;
-      } else if (typeIndex < 8) {
-        type = ChatType.TEXT;
-      } else {
-        // type = ChatType.VIDEO;
       }
+        // type = ChatType.VIDEO;
 
       List<String> images = [];
-      if (type == ChatType.IMAGE_LIST) {
-      for (int i = 0; i < random.nextInt(20); i++) {
-          if (random.nextBool()) {
-            images.add(_url);
-          } else {
-            images.add(_url2);
+      if (type == ChatType.IMAGE) {
+        if (typeIndex < 2) {
+          for (int i = 0; i < random.nextInt(20); i++) {
+            if (random.nextBool()) {
+              images.add(_url);
+            } else {
+              images.add(_url2);
+            }
           }
+        } else {
+          images.add(random.nextBool() ? _url : _url2);
         }
       }
 
@@ -104,10 +103,9 @@ class _ChatListState extends State<ChatList> {
 
   void _setPosition(_) {
     if (scrollController.hasClients) {
-      Future.delayed(const Duration(milliseconds: 50)).then((value) {
-        final position = scrollController.position.maxScrollExtent;
+      Future.delayed(const Duration(milliseconds: 100)).then((value) {
+        final position = scrollController.position.maxScrollExtent + 2000;
         scrollController.jumpTo(position);
-        print(position);
       });
     }
   }

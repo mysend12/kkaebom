@@ -125,8 +125,6 @@ class ChatCard extends StatelessWidget {
         return textMessage(context);
       case ChatType.IMAGE:
         return imageMessage(context);
-      case ChatType.IMAGE_LIST:
-        return imageListMessage(context);
       case ChatType.VIDEO:
         return vodMessage(context);
     }
@@ -155,6 +153,39 @@ class ChatCard extends StatelessWidget {
   }
 
   Widget imageMessage(context) {
+    double bigImageSize = MediaQuery.of(context).size.width * .6 * .5;
+    double smallImageSize = MediaQuery.of(context).size.width * .6 * .3333333;
+
+    double imageSize = 0;
+    int changeSizeIndex = -1;
+
+    if (_images!.length == 1) {
+      return singleImageMessage(context);
+    } else if (_images!.length == 2) {
+      imageSize = bigImageSize;
+    } else if (_images!.length == 3) {
+      imageSize = smallImageSize;
+    } else if (_images!.length == 4) {
+      imageSize = bigImageSize;
+    } else {
+      if (_images!.length % 3 == 1) {
+        changeSizeIndex = _images!.length - 4;
+      } else if (_images!.length % 3 == 2) {
+        changeSizeIndex = _images!.length - 2;
+      } else {
+        imageSize = smallImageSize;
+      }
+    }
+    return multiImageMessage(
+      context,
+      changeSizeIndex,
+      imageSize,
+      smallImageSize,
+      bigImageSize,
+    );
+  }
+
+  Widget singleImageMessage(context) {
     return GestureDetector(
       onTap: () {
         print('click!!');
@@ -171,7 +202,7 @@ class ChatCard extends StatelessWidget {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(8),
             child: Image.network(
-              _fileLink!,
+              _images![0],
               fit: BoxFit.fill,
             ),
           ),
@@ -180,31 +211,15 @@ class ChatCard extends StatelessWidget {
     );
   }
 
-  Widget imageListMessage(context) {
-    double bigImageSize = MediaQuery.of(context).size.width * .6 * .5;
-    double smallImageSize = MediaQuery.of(context).size.width * .6 * .3333333;
-
-    double imageSize = 0;
-    int changeSizeIndex = -1;
-
-    if (_images!.length == 2) {
-      imageSize = bigImageSize;
-    } else if (_images!.length == 3) {
-      imageSize = smallImageSize;
-    } else if (_images!.length == 4) {
-      imageSize = bigImageSize;
-    } else {
-      if (_images!.length % 3 == 1) {
-        changeSizeIndex = _images!.length - 4;
-      } else if (_images!.length % 3 == 2) {
-        changeSizeIndex = _images!.length - 2;
-      } else {
-        imageSize = smallImageSize;
-      }
-    }
-
+  Widget multiImageMessage(
+    context,
+    changeSizeIndex,
+    imageSize,
+    smallImageSize,
+    bigImageSize,
+  ) {
     return Container(
-      width: MediaQuery.of(context).size.width * .7,
+      width: MediaQuery.of(context).size.width * .6,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
       ),
@@ -218,7 +233,11 @@ class ChatCard extends StatelessWidget {
               print('click $index');
             },
             child: SizedBox(
-              width: changeSizeIndex == -1 ? imageSize : index < changeSizeIndex ? smallImageSize : bigImageSize,
+              width: changeSizeIndex == -1
+                  ? imageSize
+                  : index < changeSizeIndex
+                      ? smallImageSize
+                      : bigImageSize,
               height: changeSizeIndex == -1 ? imageSize : smallImageSize,
               child: Image.network(
                 _images![index],

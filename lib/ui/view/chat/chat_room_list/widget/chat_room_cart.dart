@@ -76,7 +76,7 @@ class ChatRoomCard extends StatelessWidget {
               ),
             ),
             SizedBox(
-              width: MediaQuery.of(context).size.width * .55,
+              width: MediaQuery.of(context).size.width * .52,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
