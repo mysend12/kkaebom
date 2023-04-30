@@ -32,6 +32,7 @@ class _ChatInputBarState extends State<ChatInputBar> {
           child: TextField(
             controller: widget._chatInputController,
             keyboardType: TextInputType.multiline,
+            style: Theme.of(context).textTheme.bodyMedium,
             maxLines: null,
             onChanged: (text) {
               setState(() {
@@ -83,7 +84,10 @@ class _ChatInputBarState extends State<ChatInputBar> {
                   onPressed: () {
                     print('plus!!');
                   },
-                  icon: const Icon(Icons.add_circle, size: 24,),
+                  icon: const Icon(
+                    Icons.add_circle,
+                    size: 24,
+                  ),
                 ),
               ),
               SizedBox(
@@ -93,7 +97,10 @@ class _ChatInputBarState extends State<ChatInputBar> {
                   onPressed: () {
                     print('submit!!');
                   },
-                  icon: const Icon(Icons.check_circle, size: 24,),
+                  icon: const Icon(
+                    Icons.check_circle,
+                    size: 24,
+                  ),
                 ),
               ),
             ],

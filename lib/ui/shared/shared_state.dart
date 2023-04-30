@@ -9,6 +9,9 @@ class SharedState {
     changeColor(color);
   }
 
+  double _keyboardHeight = 0;
+  double get keyboardHeight => _keyboardHeight;
+
   final EventHub _eventHub;
   late ColorScheme _lightModeColorScheme;
   late ColorScheme _darkModeColorScheme;
@@ -32,6 +35,11 @@ class SharedState {
 
   setBottomNavigationIndex(int index) {
     _bottomNavigationIndex = index;
+  }
+
+  setKeyboardHeight(double keyboardHeight) {
+    if (keyboardHeight < 0) return;
+    _keyboardHeight = keyboardHeight;
   }
 
   MaterialColor _baseColorToMaterialColor(BaseColors baseColor) {

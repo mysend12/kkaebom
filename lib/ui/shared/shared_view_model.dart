@@ -8,14 +8,16 @@ import 'shared_state.dart';
 class SharedViewModel extends ChangeNotifier {
   SharedViewModel({
     required this.sharedStateRepository,
-    required this.sharedState,
+    required sharedState,
     required this.eventHub,
-  }) {
+  }) : _sharedState = sharedState {
     _setEvent();
   }
   final SharedStateRepository sharedStateRepository;
-  final SharedState sharedState;
+  final SharedState _sharedState;
   final EventHub eventHub;
+
+  SharedState get sharedState => _sharedState;
 
   void changeColor(BaseColors color) {
     sharedState.changeColor(color);
@@ -31,6 +33,11 @@ class SharedViewModel extends ChangeNotifier {
 
   void changeBottomNavigationIndex(int index) {
     sharedState.setBottomNavigationIndex(index);
+    notifyListeners();
+  }
+
+  void setKeyboardHeight(double keyboardHeight) {
+    _sharedState.setKeyboardHeight(keyboardHeight);
     notifyListeners();
   }
 

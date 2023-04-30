@@ -67,7 +67,7 @@ class _ChatListState extends State<ChatList> {
       if (typeIndex < 5) {
         type = ChatType.IMAGE;
       }
-        // type = ChatType.VIDEO;
+      // type = ChatType.VIDEO;
 
       List<String> images = [];
       if (type == ChatType.IMAGE) {
@@ -104,7 +104,7 @@ class _ChatListState extends State<ChatList> {
   void _setPosition(_) {
     if (scrollController.hasClients) {
       Future.delayed(const Duration(milliseconds: 100)).then((value) {
-        final position = scrollController.position.maxScrollExtent + 2000;
+        final position = scrollController.position.maxScrollExtent + 1500;
         scrollController.jumpTo(position);
       });
     }
@@ -117,6 +117,7 @@ class _ChatListState extends State<ChatList> {
   @override
   Widget build(BuildContext context) {
     return KkaebomSafeWidget(
+      reverse: true,
       horizontal: 0,
       appBar: KkaebomAppBar(
         title: '$title$number',

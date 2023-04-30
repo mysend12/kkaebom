@@ -9,11 +9,17 @@ import '../shared/widget/navigation_bar.dart';
 import 'chat/chat_room_list/chat_room_list.dart';
 import 'shelter/shelter_search/shelter_search.dart';
 
-class InitScreen extends StatelessWidget {
+class InitScreen extends StatefulWidget {
   static String routeName = 'initScreen';
 
   InitScreen({Key? key}) : super(key: key);
 
+  @override
+  State<InitScreen> createState() => _InitScreenState();
+}
+
+class _InitScreenState extends State<InitScreen> with WidgetsBindingObserver {
+  late SharedViewModel sharedViewModel;
   final List<Widget> _tabs = [
     const ShelterSearch(),
     const ChatRoomList(),
@@ -33,8 +39,30 @@ class InitScreen extends StatelessWidget {
   ];
 
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeMetrics() {
+    super.didChangeMetrics();
+    if (mounted) {
+      final bottomInset = MediaQuery.of(context).viewInsets.bottom
+      - KkaebomNavigationBar.height;
+      sharedViewModel.setKeyboardHeight(bottomInset);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final sharedViewModel = context.watch<SharedViewModel>();
+    sharedViewModel = context.watch<SharedViewModel>();
 
     late final List<Widget?> leadings = [
       IconButton(

@@ -4,10 +4,11 @@ import 'package:kkaebom/ui/shared/widget/app_bar.dart';
 import 'widget/navigation_bar.dart';
 
 class KkaebomSafeWidget extends StatelessWidget {
-  const KkaebomSafeWidget({
+  KkaebomSafeWidget({
     Key? key,
     required this.child,
     required this.appBar,
+    this.reverse = false,
     this.bottomNavigationBar,
     this.physics = const NeverScrollableScrollPhysics(),
     this.horizontal = 16.0,
@@ -19,6 +20,7 @@ class KkaebomSafeWidget extends StatelessWidget {
   final double vertical;
   final KkaebomAppBar appBar;
   final KkaebomNavigationBar? bottomNavigationBar;
+  final bool reverse;
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +30,7 @@ class KkaebomSafeWidget extends StatelessWidget {
         child: Scaffold(
           appBar: appBar,
           body: SingleChildScrollView(
+            reverse: reverse,
             physics: physics,
             child: Padding(
               padding: EdgeInsets.symmetric(
