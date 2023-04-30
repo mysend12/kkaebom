@@ -3,8 +3,10 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:kkaebom/ui/shared/safe_widget.dart';
+import 'package:kkaebom/ui/shared/shared_view_model.dart';
 import 'package:kkaebom/ui/view/chat/chat_list/chat_type.dart';
 import 'package:kkaebom/ui/view/chat/chat_list/widget/chat_card.dart';
+import 'package:provider/provider.dart';
 
 import '../../../shared/widget/app_bar.dart';
 import 'widget/chat_input_bar.dart';
@@ -116,6 +118,7 @@ class _ChatListState extends State<ChatList> {
 
   @override
   Widget build(BuildContext context) {
+    SharedViewModel sharedViewModel = context.watch<SharedViewModel>();
     return KkaebomSafeWidget(
       reverse: true,
       horizontal: 0,
@@ -150,8 +153,14 @@ class _ChatListState extends State<ChatList> {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: ListView.builder(
               controller: scrollController,
-              itemBuilder: (_, index) => chatList[index],
-              itemCount: chatList.length,
+              itemBuilder: (_, index) {
+                if (index == 0) {
+                  return SizedBox(height: sharedViewModel.sharedState.keyboardHeight);
+                }
+
+                return chatList[index - 1];
+              },
+              itemCount: chatList.length + 1,
             ),
           ),
           ChatInputBar(
