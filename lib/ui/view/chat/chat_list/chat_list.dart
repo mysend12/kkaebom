@@ -68,8 +68,9 @@ class _ChatListState extends State<ChatList> {
       ChatType type = ChatType.TEXT;
       if (typeIndex < 5) {
         type = ChatType.IMAGE;
+      } else if (typeIndex > 8) {
+        type = ChatType.VIDEO;
       }
-      // type = ChatType.VIDEO;
 
       List<String> images = [];
       if (type == ChatType.IMAGE) {
@@ -96,7 +97,10 @@ class _ChatListState extends State<ChatList> {
           nickname: isMyChat ? null : 'nickname$index',
           content: content,
           chatType: type,
-          fileLink: _url,
+          vodLink: random.nextBool() ?
+          'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4' :
+          'https://youtube.com/shorts/Om6Q_IhXCvw?feature=share',
+          vodThumbnail: _url,
           images: images,
         ),
       );

@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:kkaebom/ui/view/gallery/image_detail/image_detail.dart';
+import 'package:kkaebom/ui/view/gallery/video_player/video_player.dart';
 
 import '../chat_type.dart';
 
@@ -14,7 +15,8 @@ class ChatCard extends StatelessWidget {
     ChatType chatType = ChatType.TEXT,
     String? content,
     List<String>? images,
-    String? fileLink,
+    String? vodLink,
+    String? vodThumbnail,
   })  : _isMyChat = isMyChat,
         _notReadCount = notReadCount >= 100 ? 99 : notReadCount,
         _profileImageUrl = profileImageUrl,
@@ -22,7 +24,8 @@ class ChatCard extends StatelessWidget {
         _chatType = chatType,
         _content = content,
         _images = images,
-        _fileLink = fileLink,
+        _vodLink = vodLink,
+        _vodThumbnail = vodThumbnail,
         super(key: key);
 
   final bool _isMyChat;
@@ -32,13 +35,14 @@ class ChatCard extends StatelessWidget {
 
   final ChatType _chatType;
   final String? _content;
-  String? _fileLink;
+  String? _vodLink;
+  String? _vodThumbnail;
   final List<String>? _images;
 
   @override
   Widget build(BuildContext context) {
-    if (_chatType == ChatType.IMAGE && _fileLink == null) {
-      _fileLink = _profileImageUrl;
+    if (_chatType == ChatType.IMAGE && _vodLink == null) {
+      _vodLink = _profileImageUrl;
     }
 
     return Padding(
@@ -268,6 +272,28 @@ class ChatCard extends StatelessWidget {
   }
 
   Widget vodMessage(context) {
-    return Container();
+    print(_vodLink);
+    print(_vodThumbnail);
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(
+          context,
+          KkaebomVideoPlayer.routeName,
+          arguments: {
+            'id': 1,
+            'link': _vodLink!,
+            'thumbnail': _vodThumbnail!,
+          },
+        );
+      },
+      child: SizedBox(
+        width: 100,
+        height: 100,
+        child: Image.network(
+          _vodThumbnail!,
+          fit: BoxFit.fill,
+        ),
+      ),
+    );
   }
 }
