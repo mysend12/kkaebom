@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kkaebom/ui/view/gallery/image_detail/image_detail.dart';
 
 import '../view/init_screen.dart';
 
@@ -7,5 +8,6 @@ class Routes {
 
   static final routes = <String, WidgetBuilder>{
     InitScreen.routeName: (ctx) => InitScreen(),
+    ImageDetail.routeName: (ctx) => ImageDetail(),
   };
 }

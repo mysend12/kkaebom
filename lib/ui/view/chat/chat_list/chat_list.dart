@@ -106,7 +106,7 @@ class _ChatListState extends State<ChatList> {
   void _setPosition(_) {
     if (scrollController.hasClients) {
       Future.delayed(const Duration(milliseconds: 100)).then((value) {
-        final position = scrollController.position.maxScrollExtent + 1500;
+        final position = scrollController.position.maxScrollExtent;
         scrollController.jumpTo(position);
       });
     }

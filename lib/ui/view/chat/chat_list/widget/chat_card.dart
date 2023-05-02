@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:kkaebom/ui/view/gallery/image_detail/image_detail.dart';
 
 import '../chat_type.dart';
 
@@ -188,7 +189,15 @@ class ChatCard extends StatelessWidget {
   Widget singleImageMessage(context) {
     return GestureDetector(
       onTap: () {
-        print('click!!');
+        Navigator.pushNamed(
+          context,
+          ImageDetail.routeName,
+          arguments: {
+            'id': 1,
+            'images': _images!,
+            'index': 0,
+          },
+        );
       },
       child: Align(
         alignment: _isMyChat ? Alignment.topRight : Alignment.topLeft,
@@ -230,7 +239,15 @@ class ChatCard extends StatelessWidget {
         children: List.generate(_images!.length, (index) {
           return GestureDetector(
             onTap: () {
-              print('click $index');
+              Navigator.pushNamed(
+                context,
+                ImageDetail.routeName,
+                arguments: {
+                  'id': 1,
+                  'images': _images!,
+                  'index': index,
+                },
+              );
             },
             child: SizedBox(
               width: changeSizeIndex == -1
