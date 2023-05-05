@@ -15,11 +15,11 @@ class ChatInputBar extends StatefulWidget {
 class _ChatInputBarState extends State<ChatInputBar> {
   bool isSubmitButton = false;
   double inputWidth = 0;
-  double inputButtonWidth = 80;
+  double inputButtonWidth = 40;
 
   @override
   Widget build(BuildContext context) {
-    inputWidth = MediaQuery.of(context).size.width;
+    inputWidth = MediaQuery.of(context).size.width - 40;
 
     return Row(
       children: [
@@ -74,22 +74,9 @@ class _ChatInputBarState extends State<ChatInputBar> {
             ),
           ),
         ),
-        if (isSubmitButton)
-          Row(
-            children: [
-              SizedBox(
-                width: 40,
-                child: IconButton(
-                  color: Theme.of(context).colorScheme.primary,
-                  onPressed: () {
-                    print('plus!!');
-                  },
-                  icon: const Icon(
-                    Icons.add_circle,
-                    size: 24,
-                  ),
-                ),
-              ),
+        Row(
+          children: [
+            if (isSubmitButton)
               SizedBox(
                 width: 40,
                 child: IconButton(
@@ -103,8 +90,21 @@ class _ChatInputBarState extends State<ChatInputBar> {
                   ),
                 ),
               ),
-            ],
-          ),
+            SizedBox(
+              width: 40,
+              child: IconButton(
+                color: Theme.of(context).colorScheme.primary,
+                onPressed: () {
+                  print('plus!!');
+                },
+                icon: const Icon(
+                  Icons.add_circle,
+                  size: 24,
+                ),
+              ),
+            ),
+          ],
+        ),
       ],
     );
   }

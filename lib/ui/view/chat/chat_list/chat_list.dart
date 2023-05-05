@@ -45,7 +45,7 @@ class _ChatListState extends State<ChatList> {
     setState(() {
       _height = MediaQuery.of(context).size.height -
           renderBox.localToGlobal(Offset.zero).dy -
-          80;
+          50;
     });
   }
 
