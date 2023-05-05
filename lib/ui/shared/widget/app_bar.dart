@@ -17,18 +17,16 @@ class KkaebomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      iconTheme: IconThemeData(
+        color: Theme.of(context).colorScheme.primary.withOpacity(.5),
+      ),
+      titleTextStyle: Theme.of(context)
+          .textTheme
+          .bodyMedium
+          ?.copyWith(color: Theme.of(context).colorScheme.primary),
       leading: leading,
       centerTitle: actions == null ? null : false,
-      titleSpacing: 32,
-      title: title == null
-          ? Container()
-          : Text(
-              title!,
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyMedium
-                  ?.copyWith(color: Theme.of(context).colorScheme.primary),
-            ),
+      title: title == null ? Container() : Text(title!),
       actions: actions,
       elevation: elevation,
     );

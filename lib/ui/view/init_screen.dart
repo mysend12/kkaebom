@@ -66,9 +66,8 @@ class _InitScreenState extends State<InitScreen> with WidgetsBindingObserver {
 
     late final List<Widget?> leadings = [
       IconButton(
-        icon: Icon(
+        icon: const Icon(
           Icons.menu,
-          color: Theme.of(context).colorScheme.primary,
         ),
         onPressed: () {
           print('click menu!!');
@@ -84,9 +83,8 @@ class _InitScreenState extends State<InitScreen> with WidgetsBindingObserver {
           onPressed: () {
             print('click profile!!');
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.account_circle,
-            color: Theme.of(context).colorScheme.primary,
           ),
         ),
         const SizedBox(width: 16),
@@ -94,16 +92,14 @@ class _InitScreenState extends State<InitScreen> with WidgetsBindingObserver {
       [
         IconButton(
           onPressed: () { print('click search!!'); },
-          icon: Icon(
+          icon: const Icon(
             Icons.search,
-            color: Theme.of(context).colorScheme.primary,
           ),
         ),
         IconButton(
           onPressed: () { print('click setting!!'); },
-          icon: Icon(
+          icon: const Icon(
             Icons.settings,
-            color: Theme.of(context).colorScheme.primary,
           ),
         ),
         const SizedBox(width: 16),
