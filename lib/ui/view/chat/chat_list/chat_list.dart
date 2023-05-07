@@ -97,9 +97,7 @@ class _ChatListState extends State<ChatList> {
           nickname: isMyChat ? null : 'nickname$index',
           content: content,
           chatType: type,
-          vodLink: random.nextBool() ?
-          'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4' :
-          'https://youtube.com/shorts/Om6Q_IhXCvw?feature=share',
+          vodLink: 'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
           vodThumbnail: _url,
           images: images,
         ),
@@ -110,7 +108,7 @@ class _ChatListState extends State<ChatList> {
   void _setPosition(_) {
     if (scrollController.hasClients) {
       Future.delayed(const Duration(milliseconds: 100)).then((value) {
-        final position = scrollController.position.maxScrollExtent;
+        final position = scrollController.position.maxScrollExtent + 1000;
         scrollController.jumpTo(position);
       });
     }
@@ -134,14 +132,12 @@ class _ChatListState extends State<ChatList> {
               print('click chat search');
             },
             icon: const Icon(Icons.search),
-            color: Theme.of(context).colorScheme.primary,
           ),
           IconButton(
             onPressed: () {
               print('click menu');
             },
-            icon: Icon(Icons.menu),
-            color: Theme.of(context).colorScheme.primary,
+            icon: const Icon(Icons.menu),
           ),
           const SizedBox(
             width: 16,
