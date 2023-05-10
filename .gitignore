@@ -140,5 +140,7 @@ lib/firebase_options.dart
 /ios/Podfile
 
 **.g.dart
+**.freezed.dart
+
 application-profile.yaml
 application-release.yaml
