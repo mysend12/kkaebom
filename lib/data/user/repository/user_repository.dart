@@ -5,7 +5,7 @@ class UserRepository {
 
   final UserDatabase _database;
 
-  Future<UserData> save(UserData entity) async {
+  Future<UserEntityData> save(UserEntityData entity) async {
     int id = await _database.into(_database.user).insert(entity);
 
     return await (_database.select(_database.user)

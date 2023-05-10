@@ -30,4 +30,11 @@ class ShelterViewModel extends ChangeNotifier {
   void dispose() {
     super.dispose();
   }
+
+/*
+ * 아래는 state 변수들
+ * State들을 따로 객체로 빼지 않고 viewModel에 할당
+ */
+
+
 }

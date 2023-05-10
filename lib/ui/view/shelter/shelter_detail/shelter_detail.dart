@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
+import 'package:kkaebom/domain/shelter/model/shelter.dart';
+import 'package:kkaebom/domain/user/model/user.dart';
 import 'package:kkaebom/ui/shared/safe_widget.dart';
 import 'package:kkaebom/ui/shared/widget/app_bar.dart';
 import 'package:provider/provider.dart';
 
+import '../../../shared/shared_view_model.dart';
 import '../shelter_view_model.dart';
 
 class ShelterDetail extends StatefulWidget {
@@ -16,22 +18,28 @@ class ShelterDetail extends StatefulWidget {
 
 class _ShelterDetailState extends State<ShelterDetail> {
   bool isInitVariants = false;
+  late Shelter _shelter;
+  late User? _user;
+
+  bool isAdmin = false;
+  late SharedViewModel sharedViewModel;
   late ShelterViewModel shelterViewModel;
-  late int id;
-  late String title;
-  late bool isAdmin;
-  late String url;
 
   void initVariants(BuildContext context) {
     final Map<String, dynamic> args =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
 
     shelterViewModel = context.watch<ShelterViewModel>();
+    sharedViewModel = context.watch<SharedViewModel>();
+
     isInitVariants = true;
-    id = args['id'];
-    title = args['title'];
-    isAdmin = args['isAdmin'];
-    url = args['url'];
+    _user = User(
+      id: 1,
+      name: 'user',
+    );
+    _shelter = args['shelter'];
+
+    isAdmin = _user?.id! != _shelter.adminId ? true : false;
   }
 
   @override
@@ -95,7 +103,7 @@ class _ShelterDetailState extends State<ShelterDetail> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                title,
+                _shelter.title,
                 style: Theme.of(context).textTheme.headlineLarge,
               ),
               Container(
@@ -108,7 +116,7 @@ class _ShelterDetailState extends State<ShelterDetail> {
                 decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     image: DecorationImage(
-                      image: NetworkImage(url),
+                      image: NetworkImage(_shelter.imageUrl),
                       fit: BoxFit.fill,
                     )),
               ),
@@ -183,7 +191,7 @@ class _ShelterDetailState extends State<ShelterDetail> {
               ],
             ),
           ),
-          Text('id: $id, title: $title, isAdmin: $isAdmin'),
+          Text('id: ${_shelter.id}, title: ${_shelter.title}, isAdmin: $isAdmin'),
         ],
       ),
     );

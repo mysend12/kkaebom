@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kkaebom/domain/shelter/model/shelter.dart';
 import 'package:kkaebom/ui/shared/shared_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -32,6 +33,9 @@ class _ShelterCardListState extends State<ShelterCardList> {
     });
   }
 
+  String _url =
+      'https://ichef.bbci.co.uk/news/800/cpsprodpb/E172/production/_126241775_getty_cats.png';
+
   @override
   Widget build(BuildContext context) {
     SharedViewModel sharedViewModel = context.watch<SharedViewModel>();
@@ -44,7 +48,12 @@ class _ShelterCardListState extends State<ShelterCardList> {
             return SizedBox(height: sharedViewModel.sharedState.keyboardHeight);
           }
           return ShelterCard(
-            index: index,
+            shelter: Shelter(
+              id: index,
+              title: 'title $index',
+              imageUrl: _url,
+              adminId: 1
+            ),
           );
         },
         itemCount: 11,

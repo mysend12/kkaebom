@@ -2,12 +2,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:kkaebom/ui/view/shelter/shelter_detail/shelter_detail.dart';
 
-class ShelterCard extends StatelessWidget {
-  ShelterCard({Key? key, required this.index}) : super(key: key);
-  int index;
+import '../../../../../domain/shelter/model/shelter.dart';
 
-  String _url =
-      'https://ichef.bbci.co.uk/news/800/cpsprodpb/E172/production/_126241775_getty_cats.png';
+class ShelterCard extends StatelessWidget {
+  ShelterCard({Key? key, required this.shelter}) : super(key: key);
+  Shelter shelter;
 
   @override
   Widget build(BuildContext context) {
@@ -17,10 +16,7 @@ class ShelterCard extends StatelessWidget {
           context,
           ShelterDetail.routeName,
           arguments: {
-            'id': index,
-            'title': 'ABCDE $index',
-            'isAdmin': true,
-            'url': _url,
+            'shelter': shelter,
           },
         );
       },
@@ -35,7 +31,7 @@ class ShelterCard extends StatelessWidget {
           children: [
             const SizedBox(width: 12),
             CachedNetworkImage(
-              imageUrl: _url,
+              imageUrl: shelter.imageUrl,
               width: 76,
               height: 76,
               progressIndicatorBuilder: (_, url, download) {
@@ -71,7 +67,7 @@ class ShelterCard extends StatelessWidget {
               children: [
                 const SizedBox(height: 20),
                 Text(
-                  'ABCDEF $index',
+                  shelter.title,
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
                 const SizedBox(height: 10),
