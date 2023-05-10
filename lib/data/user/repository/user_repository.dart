@@ -6,9 +6,9 @@ class UserRepository {
   final UserDatabase _database;
 
   Future<UserEntityData> save(UserEntityData entity) async {
-    int id = await _database.into(_database.user).insert(entity);
+    int id = await _database.into(_database.userEntity).insert(entity);
 
-    return await (_database.select(_database.user)
+    return await (_database.select(_database.userEntity)
           ..where((e) => e.id.equals(id)))
         .getSingle();
   }
