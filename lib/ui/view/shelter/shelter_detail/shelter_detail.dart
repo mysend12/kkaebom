@@ -3,6 +3,7 @@ import 'package:kkaebom/domain/shelter/model/shelter.dart';
 import 'package:kkaebom/domain/user/model/user.dart';
 import 'package:kkaebom/ui/shared/safe_widget.dart';
 import 'package:kkaebom/ui/shared/widget/app_bar.dart';
+import 'package:kkaebom/ui/view/shelter/shelter_detail/widget/volunteer_activity_list.dart';
 import 'package:provider/provider.dart';
 
 import '../../../shared/shared_view_model.dart';
@@ -38,7 +39,6 @@ class _ShelterDetailState extends State<ShelterDetail> {
       name: 'user',
     );
     _shelter = args['shelter'];
-
     isAdmin = _user?.id! != _shelter.adminId ? true : false;
   }
 
@@ -122,76 +122,8 @@ class _ShelterDetailState extends State<ShelterDetail> {
               ),
             ],
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: 16,
-              horizontal: 32,
-            ),
-            child: Row(
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    border: Border.all(width: 1),
-                  ),
-                  child: Column(
-                    children: [
-                      Text(
-                        '4월 8일',
-                        style: Theme.of(context).textTheme.bodyMedium,
-                      ),
-                      Text(
-                        '07:30',
-                        style: Theme.of(context).textTheme.bodyMedium,
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(width: 16),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 8,
-                            vertical: 4,
-                          ),
-                          decoration: BoxDecoration(
-                            color: Theme.of(context)
-                                .colorScheme
-                                .secondaryContainer,
-                          ),
-                          child: Text(
-                            '산책',
-                            style: Theme.of(context)
-                                .textTheme
-                                .labelSmall
-                                ?.copyWith(
-                                  color:
-                                      Theme.of(context).colorScheme.background,
-                                ),
-                          ),
-                        ),
-                        const SizedBox(width: 12),
-                        Text(
-                          '예상 소요시간: 4시간',
-                          style: Theme.of(context).textTheme.bodyMedium,
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      '총원 10명 중 1명 참가',
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          Text('id: ${_shelter.id}, title: ${_shelter.title}, isAdmin: $isAdmin'),
+          const SizedBox(height: 16),
+          VolunteerActivityList(shelter: _shelter),
         ],
       ),
     );
