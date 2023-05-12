@@ -26,6 +26,8 @@ class _ShelterDetailState extends State<ShelterDetail> {
   late SharedViewModel sharedViewModel;
   late ShelterViewModel shelterViewModel;
 
+  DateTime date = DateTime.now();
+
   void initVariants(BuildContext context) {
     final Map<String, dynamic> args =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
@@ -39,7 +41,7 @@ class _ShelterDetailState extends State<ShelterDetail> {
       name: 'user',
     );
     _shelter = args['shelter'];
-    isAdmin = _user?.id! != _shelter.adminId ? true : false;
+    isAdmin = _user?.id! == _shelter.adminId ? true : false;
   }
 
   @override
@@ -60,10 +62,10 @@ class _ShelterDetailState extends State<ShelterDetail> {
       ),
       child: Column(
         children: [
-          if (isAdmin)
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              if (isAdmin)
                 ElevatedButton(
                   onPressed: () {
                     print('관리하기!!');
@@ -79,14 +81,16 @@ class _ShelterDetailState extends State<ShelterDetail> {
                     style: Theme.of(context).textTheme.labelSmall,
                   ),
                 ),
-                GestureDetector(
-                  onTap: () {
-                    print('2023년 5월');
-                  },
+              GestureDetector(
+                onTap: () {
+                  print('${date.year}년 ${date.month}월');
+                },
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 16),
                   child: Row(
                     children: [
                       Text(
-                        '2023년 5월',
+                        '${date.year}년 ${date.month}월',
                         style: Theme.of(context).textTheme.labelSmall,
                       ),
                       const Icon(
@@ -96,8 +100,9 @@ class _ShelterDetailState extends State<ShelterDetail> {
                     ],
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
+          ),
           const SizedBox(height: 16),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,

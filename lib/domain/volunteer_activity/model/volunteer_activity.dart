@@ -16,6 +16,7 @@ class VolunteerActivity with _$VolunteerActivity{
     required String estimatedTime,
     required DateTime startDate,
     required DateTime regDate,
+    @Default([]) List<String> images,
     @Default([]) List<User> users,
   }) = _VolunteerActivity;
 
