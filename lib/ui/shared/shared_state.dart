@@ -1,5 +1,6 @@
 import 'package:event_hub/event_hub.dart';
 import 'package:flutter/material.dart';
+import 'package:kkaebom/domain/user/model/user.dart';
 
 import '../../data/shared_state/model/base_colors.dart';
 import 'theme/colors.dart';
@@ -21,6 +22,12 @@ class SharedState {
   ColorScheme get darkModeColorScheme => _darkModeColorScheme;
   int get bottomNavigationIndex => _bottomNavigationIndex;
 
+  late User? _user;
+  User? get user => _user;
+
+  setUser(User? user) {
+    _user = user;
+  }
 
   changeColor(BaseColors color) {
     MaterialColor materialColor = _baseColorToMaterialColor(color);

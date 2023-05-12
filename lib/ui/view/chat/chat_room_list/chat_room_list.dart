@@ -1,42 +1,31 @@
 import 'package:flutter/material.dart';
 
 import '../../../shared/widget/navigation_bar.dart';
+import '../../../shared/widget_size_calculator.dart';
 import 'widget/chat_room_cart.dart';
 
 class ChatRoomList extends StatefulWidget {
   const ChatRoomList({Key? key}) : super(key: key);
 
   @override
-  State<ChatRoomList> createState() => _ChatRoomListState();
+  WidgetSizeCalculator<ChatRoomList> createState() => _ChatRoomListState();
 }
 
-class _ChatRoomListState extends State<ChatRoomList> {
-  final GlobalKey _key = GlobalKey();
-  double _height = 0;
-
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback(_setHeight);
-  }
-
-  void _setHeight(_) {
-    final renderBox = _key.currentContext?.findRenderObject() as RenderBox;
-    setState(() {
-      _height = MediaQuery.of(context).size.height -
-          renderBox.localToGlobal(Offset.zero).dy -
-          KkaebomNavigationBar.height;
-    });
-  }
-
+class _ChatRoomListState extends WidgetSizeCalculator<ChatRoomList> {
   String _url =
       'https://ichef.bbci.co.uk/news/800/cpsprodpb/E172/production/_126241775_getty_cats.png';
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    initBottomWidgetHeight(KkaebomNavigationBar.height.toDouble());
+    super.initState();
+  }
+
+  @override
+  Widget builder(BuildContext context) {
     return SizedBox(
-      key: _key,
-      height: _height,
+      key: key,
+      height: height,
       child: ListView.builder(
         itemBuilder: (_, index) {
           return ChatRoomCard(

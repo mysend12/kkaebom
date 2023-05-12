@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 
 import '../../data/shared_state/model/base_colors.dart';
 import '../../data/shared_state/repository/shared_state_repository.dart';
+import '../../domain/user/model/user.dart';
 import 'shared_state.dart';
 
 class SharedViewModel extends ChangeNotifier {
@@ -18,6 +19,10 @@ class SharedViewModel extends ChangeNotifier {
   final EventHub eventHub;
 
   SharedState get sharedState => _sharedState;
+
+  void setUser(User? user) {
+    _sharedState.setUser(user);
+  }
 
   void changeColor(BaseColors color) {
     sharedState.changeColor(color);

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kkaebom/domain/volunteer_activity/model/volunteer_activity.dart';
+import 'package:kkaebom/ui/shared/shared_view_model.dart';
+import 'package:provider/provider.dart';
 
 import 'volunteer_activity_detail_card.dart';
 
@@ -20,9 +22,18 @@ class _VolunteerActivityCardState extends State<VolunteerActivityCard> {
   }
 
   bool isSelected = false;
+  bool isApply = false;
 
   @override
   Widget build(BuildContext context) {
+    SharedViewModel sharedViewModel = context.watch<SharedViewModel>();
+
+    for (var user in widget.volunteerActivity.users) {
+      if (user.id == sharedViewModel.sharedState.user?.id) {
+        isApply = true;
+      }
+    }
+
     return Padding(
       padding: EdgeInsets.only(
         top: 16,

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:kkaebom/domain/shelter/model/shelter.dart';
 
 import '../../../../../domain/volunteer_activity/model/volunteer_activity.dart';
+import '../../../../shared/widget_size_calculator.dart';
 import 'volunteer_activity_card.dart';
 
 class VolunteerActivityList extends StatefulWidget {
@@ -11,14 +12,12 @@ class VolunteerActivityList extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<VolunteerActivityList> createState() => _VolunteerActivityListState();
+  WidgetSizeCalculator<VolunteerActivityList> createState() => _VolunteerActivityListState();
 
   final Shelter shelter;
 }
 
-class _VolunteerActivityListState extends State<VolunteerActivityList> {
-  final GlobalKey _key = GlobalKey();
-  double _height = 0;
+class _VolunteerActivityListState extends WidgetSizeCalculator<VolunteerActivityList> {
   List<String> _images = [
     "https://blog.kakaocdn.net/dn/tEMUl/btrDc6957nj/NwJoDw0EOapJNDSNRNZK8K/img.jpg",
     "https://img.freepik.com/free-photo/adorable-kitty-looking-like-it-want-to-hunt_23-2149167099.jpg?w=2000",
@@ -43,25 +42,10 @@ class _VolunteerActivityListState extends State<VolunteerActivityList> {
   ];
 
   @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback(_setHeight);
-  }
-
-  void _setHeight(_) {
-    final renderBox = _key.currentContext?.findRenderObject() as RenderBox?;
-    if (renderBox == null) return;
-    setState(() {
-      _height = MediaQuery.of(context).size.height -
-          renderBox.localToGlobal(Offset.zero).dy;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget builder(BuildContext context) {
     return SizedBox(
-      key: _key,
-      height: _height,
+      key: key,
+      height: height,
       child: ListView.builder(
         itemBuilder: (context, index) => VolunteerActivityCard(
           volunteerActivity: VolunteerActivity(
