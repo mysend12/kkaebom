@@ -73,12 +73,13 @@ class _ShelterDetailState extends State<ShelterDetail> {
                   style: ButtonStyle(
                     padding: MaterialStateProperty.all(EdgeInsets.zero),
                     backgroundColor: MaterialStateColor.resolveWith(
-                      (states) => Theme.of(context).colorScheme.inversePrimary,
+                      (states) => Theme.of(context).colorScheme.primary,
                     ),
                   ),
                   child: Text(
                     '관리하기',
-                    style: Theme.of(context).textTheme.labelSmall,
+                    style: Theme.of(context).textTheme.labelSmall!.copyWith(
+                        color: Theme.of(context).colorScheme.background),
                   ),
                 ),
               GestureDetector(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kkaebom/domain/volunteer_activity/model/volunteer_activity.dart';
+import 'package:kkaebom/ui/shared/dialogs.dart';
 import 'package:kkaebom/ui/shared/shared_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -37,14 +38,18 @@ class _VolunteerActivityCardState extends State<VolunteerActivityCard> {
     return LayoutBuilder(
       builder: (context, constraints) {
         bool isMultiWidgetInRow = false;
-        if (MediaQuery.of(context).size.width ~/ 317.5  + 32 >= 2) {
+        if (MediaQuery.of(context).size.width ~/ 317.5 + 32 >= 2) {
           isMultiWidgetInRow = true;
         }
 
         return Padding(
           padding: EdgeInsets.only(
-            top: isMultiWidgetInRow ? 8 :16,
-            bottom: isSelected ? 0 : isMultiWidgetInRow ? 0 : 16,
+            top: isMultiWidgetInRow ? 8 : 16,
+            bottom: isSelected
+                ? 0
+                : isMultiWidgetInRow
+                    ? 0
+                    : 16,
             left: isMultiWidgetInRow ? 8 : 16,
             right: isMultiWidgetInRow ? 8 : 16,
           ),
@@ -96,9 +101,10 @@ class _VolunteerActivityCardState extends State<VolunteerActivityCard> {
                                     .textTheme
                                     .labelSmall
                                     ?.copyWith(
-                                  color:
-                                  Theme.of(context).colorScheme.background,
-                                ),
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .background,
+                                    ),
                               ),
                             ),
                             const SizedBox(width: 12),
@@ -117,12 +123,31 @@ class _VolunteerActivityCardState extends State<VolunteerActivityCard> {
                             const SizedBox(width: 24),
                             GestureDetector(
                               onTap: () {
-                                print('신청');
+                                simpleMessageDialog(
+                                  context,
+                                  textSpan: TextSpan(
+                                    children: [
+                                      TextSpan(
+                                        text: '신청하시겠습니까?',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyMedium!
+                                            .copyWith(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .primary),
+                                      )
+                                    ],
+                                  ),
+                                );
                               },
                               child: Container(
                                 padding: const EdgeInsets.all(4),
                                 decoration: BoxDecoration(
-                                  color: Theme.of(context).colorScheme.secondaryContainer.withOpacity(.1),
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .secondaryContainer
+                                      .withOpacity(.1),
                                   borderRadius: BorderRadius.circular(12),
                                 ),
                                 child: Text(
@@ -144,8 +169,7 @@ class _VolunteerActivityCardState extends State<VolunteerActivityCard> {
                 ),
             ],
           ),
-        )
-        ;
+        );
       },
     );
   }
