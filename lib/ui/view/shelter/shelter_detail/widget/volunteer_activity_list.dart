@@ -12,12 +12,14 @@ class VolunteerActivityList extends StatefulWidget {
       : super(key: key);
 
   @override
-  WidgetSizeCalculator<VolunteerActivityList> createState() => _VolunteerActivityListState();
+  WidgetSizeCalculator<VolunteerActivityList> createState() =>
+      _VolunteerActivityListState();
 
   final Shelter shelter;
 }
 
-class _VolunteerActivityListState extends WidgetSizeCalculator<VolunteerActivityList> {
+class _VolunteerActivityListState
+    extends WidgetSizeCalculator<VolunteerActivityList> {
   List<String> _images = [
     "https://blog.kakaocdn.net/dn/tEMUl/btrDc6957nj/NwJoDw0EOapJNDSNRNZK8K/img.jpg",
     "https://img.freepik.com/free-photo/adorable-kitty-looking-like-it-want-to-hunt_23-2149167099.jpg?w=2000",
@@ -46,23 +48,56 @@ class _VolunteerActivityListState extends WidgetSizeCalculator<VolunteerActivity
     return SizedBox(
       key: key,
       height: height,
-      child: ListView.builder(
-        itemBuilder: (context, index) => VolunteerActivityCard(
-          volunteerActivity: VolunteerActivity(
-              id: index,
-              shelter_id: widget.shelter.id!,
-              tag: '산책',
-              title: '봉사 $index',
-              content: '내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용',
-              images: _images.sublist(
-                0,
-                Random().nextInt(_images.length - 2) + 1,
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          if (MediaQuery.of(context).size.width ~/ 317.5  + 32 >= 2) {
+            int crossAxisCount = constraints.maxWidth ~/ 317.5;
+
+            return GridView.builder(
+              padding: EdgeInsets.zero,
+              itemBuilder: (context, index) => VolunteerActivityCard(
+                volunteerActivity: VolunteerActivity(
+                    id: index,
+                    shelter_id: widget.shelter.id!,
+                    tag: '산책',
+                    title: '봉사 $index',
+                    content:
+                        '내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용',
+                    images: _images.sublist(
+                      0,
+                      Random().nextInt(_images.length - 2) + 1,
+                    ),
+                    estimatedTime: '약 4시간',
+                    startDate: DateTime.now(),
+                    regDate: DateTime.now()),
               ),
-              estimatedTime: '약 4시간',
-              startDate: DateTime.now(),
-              regDate: DateTime.now()),
-        ),
-        itemCount: 10,
+              itemCount: 10,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: crossAxisCount,
+                childAspectRatio: 1 / .3,
+              ),
+            );
+          }
+          return ListView.builder(
+            itemBuilder: (context, index) => VolunteerActivityCard(
+              volunteerActivity: VolunteerActivity(
+                  id: index,
+                  shelter_id: widget.shelter.id!,
+                  tag: '산책',
+                  title: '봉사 $index',
+                  content:
+                      '내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용',
+                  images: _images.sublist(
+                    0,
+                    Random().nextInt(_images.length - 2) + 1,
+                  ),
+                  estimatedTime: '약 4시간',
+                  startDate: DateTime.now(),
+                  regDate: DateTime.now()),
+            ),
+            itemCount: 10,
+          );
+        },
       ),
     );
   }
