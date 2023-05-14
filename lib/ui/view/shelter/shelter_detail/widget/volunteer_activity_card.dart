@@ -122,24 +122,31 @@ class _VolunteerActivityCardState extends State<VolunteerActivityCard> {
                             ),
                             const SizedBox(width: 24),
                             GestureDetector(
-                              onTap: () {
-                                simpleMessageDialog(
+                              onTap: () async {
+                                bool? result = await simpleConfirmButtonDialog(
                                   context,
                                   textSpan: TextSpan(
                                     children: [
                                       TextSpan(
-                                        text: '신청하시겠습니까?',
+                                        text: isApply
+                                            ? '신청을 취소하시겠습니까?'
+                                            : '신청하시겠습니까?',
                                         style: Theme.of(context)
                                             .textTheme
                                             .bodyMedium!
                                             .copyWith(
-                                                color: Theme.of(context)
-                                                    .colorScheme
-                                                    .primary),
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .primary,
+                                            ),
                                       )
                                     ],
                                   ),
-                                );
+                                  leftButton: isApply ? '아니오' : '네',
+                                  rightButton: isApply ? '네' : '아니오',
+                                ) as bool?;
+
+                                setState(() => isApply = result??isApply);
                               },
                               child: Container(
                                 padding: const EdgeInsets.all(4),
@@ -151,7 +158,7 @@ class _VolunteerActivityCardState extends State<VolunteerActivityCard> {
                                   borderRadius: BorderRadius.circular(12),
                                 ),
                                 child: Text(
-                                  '신청',
+                                  isApply ? '신청 취소' : '신청',
                                   style: Theme.of(context).textTheme.bodyMedium,
                                 ),
                               ),

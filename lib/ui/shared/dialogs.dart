@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void simpleMessageDialog(
@@ -61,8 +60,8 @@ Future<dynamic> simpleConfirmButtonDialog(
   double? minHeight,
   double? maxWidth,
   double? maxHeight,
-  String trueMessage = '네',
-  String falseMessage = '아니오',
+  String leftButton = '네',
+  String rightButton = '아니오',
 }) {
   minWidth ??= 10;
   minHeight ??= 10;
@@ -98,6 +97,7 @@ Future<dynamic> simpleConfirmButtonDialog(
                 RichText(
                   text: textSpan,
                 ),
+                const SizedBox(height: 12),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -106,38 +106,31 @@ Future<dynamic> simpleConfirmButtonDialog(
                         Navigator.of(context, rootNavigator: true).pop(true);
                       },
                       style: TextButton.styleFrom(
+                        backgroundColor: Theme.of(context).colorScheme.primary.withOpacity(.5),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(35.0),
-                          side: BorderSide(
-                            color: Theme.of(context).colorScheme.primary.withOpacity(.3),
-                            width: 1,
-                            style: BorderStyle.solid,
-                          ),
                         ),
                       ),
                       child: Text(
-                        trueMessage,
+                        leftButton,
                         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                               color: Theme.of(context).colorScheme.background,
                             ),
                       ),
                     ),
+                    const SizedBox(width: 12),
                     TextButton(
                       onPressed: () {
                         Navigator.of(context, rootNavigator: true).pop(false);
                       },
                       style: TextButton.styleFrom(
+                        backgroundColor: Theme.of(context).colorScheme.primary.withOpacity(.1),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(35.0),
-                          side: BorderSide(
-                            color: Theme.of(context).colorScheme.primary.withOpacity(.1),
-                            width: 1,
-                            style: BorderStyle.solid,
-                          ),
                         ),
                       ),
                       child: Text(
-                        falseMessage,
+                        rightButton,
                         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                               color: Theme.of(context).colorScheme.background,
                             ),
