@@ -48,56 +48,24 @@ class _VolunteerActivityListState
     return SizedBox(
       key: key,
       height: height,
-      child: LayoutBuilder(
-        builder: (context, constraints) {
-          if (MediaQuery.of(context).size.width ~/ 317.5  + 32 >= 2) {
-            int crossAxisCount = constraints.maxWidth ~/ 317.5;
-
-            return GridView.builder(
-              padding: EdgeInsets.zero,
-              itemBuilder: (context, index) => VolunteerActivityCard(
-                volunteerActivity: VolunteerActivity(
-                    id: index,
-                    shelter_id: widget.shelter.id!,
-                    tag: '산책',
-                    title: '봉사 $index',
-                    content:
-                        '내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용',
-                    images: _images.sublist(
-                      0,
-                      Random().nextInt(_images.length - 2) + 1,
-                    ),
-                    estimatedTime: '약 4시간',
-                    startDate: DateTime.now(),
-                    regDate: DateTime.now()),
+      child: ListView.builder(
+        itemBuilder: (context, index) => VolunteerActivityCard(
+          volunteerActivity: VolunteerActivity(
+              id: index,
+              shelter_id: widget.shelter.id!,
+              tag: '산책',
+              title: '봉사 $index',
+              content:
+                  '내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용',
+              images: _images.sublist(
+                0,
+                Random().nextInt(_images.length - 2) + 1,
               ),
-              itemCount: 10,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: crossAxisCount,
-                childAspectRatio: 1 / .3,
-              ),
-            );
-          }
-          return ListView.builder(
-            itemBuilder: (context, index) => VolunteerActivityCard(
-              volunteerActivity: VolunteerActivity(
-                  id: index,
-                  shelter_id: widget.shelter.id!,
-                  tag: '산책',
-                  title: '봉사 $index',
-                  content:
-                      '내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용',
-                  images: _images.sublist(
-                    0,
-                    Random().nextInt(_images.length - 2) + 1,
-                  ),
-                  estimatedTime: '약 4시간',
-                  startDate: DateTime.now(),
-                  regDate: DateTime.now()),
-            ),
-            itemCount: 10,
-          );
-        },
+              estimatedTime: '약 4시간',
+              startDate: DateTime.now(),
+              regDate: DateTime.now()),
+        ),
+        itemCount: 10,
       ),
     );
   }

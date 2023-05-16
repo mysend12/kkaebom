@@ -37,21 +37,12 @@ class _VolunteerActivityCardState extends State<VolunteerActivityCard> {
 
     return LayoutBuilder(
       builder: (context, constraints) {
-        bool isMultiWidgetInRow = false;
-        if (MediaQuery.of(context).size.width ~/ 317.5 + 32 >= 2) {
-          isMultiWidgetInRow = true;
-        }
-
         return Padding(
           padding: EdgeInsets.only(
-            top: isMultiWidgetInRow ? 8 : 16,
-            bottom: isSelected
-                ? 0
-                : isMultiWidgetInRow
-                    ? 0
-                    : 16,
-            left: isMultiWidgetInRow ? 8 : 16,
-            right: isMultiWidgetInRow ? 8 : 16,
+            top: 16,
+            bottom: isSelected ? 0 : 16,
+            left: 16,
+            right: 16,
           ),
           child: Column(
             children: [
@@ -146,7 +137,7 @@ class _VolunteerActivityCardState extends State<VolunteerActivityCard> {
                                   rightButton: isApply ? '네' : '아니오',
                                 ) as bool?;
 
-                                setState(() => isApply = result??isApply);
+                                setState(() => isApply = result ?? isApply);
                               },
                               child: Container(
                                 padding: const EdgeInsets.all(4),
