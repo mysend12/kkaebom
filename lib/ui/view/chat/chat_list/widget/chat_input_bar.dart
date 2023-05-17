@@ -82,7 +82,7 @@ class _ChatInputBarState extends State<ChatInputBar> {
                 child: IconButton(
                   color: Theme.of(context).colorScheme.primary,
                   onPressed: () {
-                    print('submit!!');
+                    submit();
                   },
                   icon: const Icon(
                     Icons.check_circle,
@@ -94,9 +94,7 @@ class _ChatInputBarState extends State<ChatInputBar> {
               width: 40,
               child: IconButton(
                 color: Theme.of(context).colorScheme.primary,
-                onPressed: () {
-                  print('plus!!');
-                },
+                onPressed: () => submit(),
                 icon: const Icon(
                   Icons.add_circle,
                   size: 24,
@@ -107,5 +105,10 @@ class _ChatInputBarState extends State<ChatInputBar> {
         ),
       ],
     );
+  }
+
+  void submit() {
+    print(widget._chatInputController.text);
+    widget._chatInputController.text = '';
   }
 }
